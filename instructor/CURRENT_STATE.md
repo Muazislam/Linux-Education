@@ -1,52 +1,43 @@
 # Current State
 
-Last updated: 2026-08-26
+Last updated: 2026-09-04
 
 ## Current Position
 
 - Current phase: Phase 0 - Environment, safety, and curriculum architecture.
 - Current module: Not started.
-- Current competency focus: Phase 0 implementation, lab safety, evidence protocol, and baseline assessment.
-- Current lab state: Unknown; no lab VM or Docker lab evidence has been recorded yet.
+- Current competency focus: Baseline diagnostic tasks (D2–D7 remaining).
+- Current lab state: `virt-manager` installed on host; Docker verified working.
 
 ## Demonstrated Evidence
 
-- The learner has specified a detailed curriculum objective, teaching protocol, safety model, source hierarchy, and desired repository architecture.
-- No Linux practical competency has yet been demonstrated inside this repository.
+- Orientation commands executed and verified on host: `pwd`, `whoami`, `echo $0`, `cat /etc/*-release`, `uname -v`, and `uname -r`.
+- Demonstrated ability to read local man pages (`man uname`), command help (`cat --help`), and handle globbing syntax.
+- Docker operational verification (ran `hello-world` container).
 
 ## Not Yet Demonstrated
 
-- Shell competence.
-- Filesystem and permissions competence.
+- Tasks D2–D7 of baseline diagnostic.
+- Shell quoting and expansion models.
+- Filesystem navigation and permissions in depth.
 - Process inspection and control.
 - systemd operation and troubleshooting.
 - Arch package management.
 - Networking diagnosis.
 - Backup and restore.
-- VM lab operation.
-- Docker lab operation.
+- VM lab operation and snapshots.
 - Failure recovery.
-- Documentation-based troubleshooting.
 
 ## Active Weaknesses
 
-No weaknesses have been empirically observed yet. Treat all competency levels as unknown or L0 until evidence exists.
+- Initial tendency to search Google/AI rather than local man pages/built-in help first (addressing through practice).
+- Execution of commands without inspecting parameters (e.g. `$0`, `cat` flags).
 
 ## Unresolved Questions
 
-- Which virtualization tool will be used for disposable Arch VMs?
-- Whether Docker is already installed and usable on the EndeavourOS host.
-- How much weekly Linux study time the learner can realistically commit.
-- Whether the learner already has prior command-line experience beyond the stated web-development track.
-- Whether the learner accepts the chat interface and record workflow as usable rather than burdensome.
+- Creation of disposable Arch VM and snapshot verification in `virt-manager`.
+- Host backup strategy confirmation.
 
 ## Next Recommended Action
 
-Begin `curriculum/phases/phase-0.md`:
-
-1. Review and approve or amend `curriculum/roadmap.md`.
-2. Record lab environment decisions in `decisions/phase-0/lab-environment.md`.
-3. Complete `labs/phase-0/safety-checklist.md`.
-4. Use `evidence/phase-0/sample-evidence.md` for the first evidence record.
-5. Review `instructor/CHAT_INTERFACE.md` and the learning-record workflow.
-6. Attempt `assessments/phase-0/baseline-diagnostic.md`.
+Resume `assessments/phase-0/baseline-diagnostic.md` Task D2 (Files and Paths).

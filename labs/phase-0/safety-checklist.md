@@ -1,6 +1,6 @@
 # Phase 0 Safety Checklist
 
-Last updated: 2026-08-26
+Last updated: 2026-09-04
 
 Complete this before any practical lab beyond harmless host inspection.
 
@@ -8,11 +8,11 @@ Complete this before any practical lab beyond harmless host inspection.
 
 | Item | Learner Response | Verified |
 |---|---|---|
-| Primary host operating system | EndeavourOS | Not verified |
-| Host is daily-use system | Yes | Not verified |
-| Disposable Arch VM exists | Unknown | No |
-| VM snapshot capability exists | Unknown | No |
-| Docker is installed and usable | Unknown | No |
+| Primary host operating system | EndeavourOS | Yes (verified via `/etc/*-release`) |
+| Host is daily-use system | Yes | Yes |
+| Disposable Arch VM exists | virt-manager installed | In progress (VM creation pending) |
+| VM snapshot capability exists | Supported by QEMU/KVM | Pending verification in lab |
+| Docker is installed and usable | Yes | Yes (hello-world ran successfully) |
 | Backup strategy for important host data exists | Unknown | No |
 
 ## Safety Rules
@@ -39,6 +39,5 @@ HOW SUCCESS WILL BE VERIFIED:
 
 ## Phase 0 Status
 
-Safety gate status: Not complete.
+Safety gate status: In Progress (Host & Docker confirmed; VM lab setup and host backup verification pending).
 
-Reason: disposable VM, snapshot path, Docker state, and backup state are not yet verified.

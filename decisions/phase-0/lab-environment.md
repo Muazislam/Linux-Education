@@ -1,10 +1,10 @@
 # Phase 0 Lab Environment Decision
 
-Last updated: 2026-08-26
+Last updated: 2026-09-04
 
 ## Decision Status
 
-Not decided.
+Decided.
 
 ## Context
 
@@ -22,15 +22,15 @@ The learner uses EndeavourOS as the primary host. Dangerous Linux labs must not 
 ## Decision Record
 
 ```text
-DATE:
-CHOSEN VM TOOL:
-WHY:
-DOCKER STATUS:
-HOST BACKUP STATUS:
-WEEKLY TIME BUDGET:
-OPEN QUESTIONS:
+DATE: 2026-09-04
+CHOSEN VM TOOL: virt-manager / QEMU / KVM
+WHY: Linux-native, high performance, robust snapshot support, installed on host.
+DOCKER STATUS: Installed and verified functional (ran hello-world container).
+HOST BACKUP STATUS: Pending verification before destructive labs.
+WEEKLY TIME BUDGET: ~20 hours/week (flexible based on full-stack web dev load).
+OPEN QUESTIONS: Snapshot configuration and virtual networking setup in virt-manager.
 ```
 
 ## Next Action
 
-Choose VM tool and verify whether Docker is available.
+Complete Phase 0 baseline diagnostic and verify disposable Arch VM setup.
