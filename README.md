@@ -255,13 +255,15 @@ _Lesson Logged:_ Shell arguments are whitespace-sensitive (e.g. `cat /etc/* -rel
 
 ## Feedback & Discussions
 
-This is a personal, evidence-backed learning repository and engineering portfolio. While external pull requests are not accepted for curriculum progression, suggestions, feedback, and discussions are warmly welcomed via [GitHub Issues](https://github.com/muazislambabar)!
+This is a personal, evidence-backed learning repository and engineering portfolio. 
+- **Contributions:** Pull requests directly altering the learning records are not accepted, as this repository tracks individual learning progression.
+- **Feedback & Reuse:** If you have suggestions or want to adapt this repository architecture/templates for your own learning journey, you are free to fork it, and feedback/discussions are warmly welcomed via [GitHub Issues](https://github.com/muazislambabar)!
 
 ---
 
 ## License
 
-This repository and its documentation templates are licensed under the [MIT License](https://opensource.org/licenses/MIT).
+This repository and its curriculum templates are licensed under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for full details and copyright information.
 
 ---
 
