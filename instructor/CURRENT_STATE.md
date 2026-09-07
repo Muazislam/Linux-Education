@@ -13,13 +13,14 @@ Last updated: 2026-09-04
 
 - Orientation commands executed and verified on host: `pwd`, `whoami`, `echo $0`, `cat /etc/*-release`, `uname -v`, and `uname -r`.
 - Demonstrated ability to read local man pages (`man uname`), command help (`cat --help`), and handle globbing syntax.
+- Demonstrated path navigation, relative vs absolute path mental model, directory listing flags (`ls -l`, `ls -la`, `ls -a`), and root `/` vs home `~`.
 - Docker operational verification (ran `hello-world` container).
 
 ## Not Yet Demonstrated
 
-- Tasks D2–D7 of baseline diagnostic.
+- Tasks D3–D7 of baseline diagnostic.
 - Shell quoting and expansion models.
-- Filesystem navigation and permissions in depth.
+- Streams and redirection mechanics.
 - Process inspection and control.
 - systemd operation and troubleshooting.
 - Arch package management.
@@ -31,7 +32,7 @@ Last updated: 2026-09-04
 ## Active Weaknesses
 
 - Initial tendency to search Google/AI rather than local man pages/built-in help first (addressing through practice).
-- Execution of commands without inspecting parameters (e.g. `$0`, `cat` flags).
+- Difficulty navigating long `man` pages (resolved via `/search` pattern in `less`/`man`).
 
 ## Unresolved Questions
 
@@ -40,4 +41,4 @@ Last updated: 2026-09-04
 
 ## Next Recommended Action
 
-Resume `assessments/phase-0/baseline-diagnostic.md` Task D2 (Files and Paths).
+Resume `assessments/phase-0/baseline-diagnostic.md` Task D3 (Streams and Redirection).

@@ -118,31 +118,37 @@ Competencies sampled: troubleshooting method, full-stack Linux integration.
 ## Assessment Record
 
 ```text
-DATE: 2026-09-04
+DATE: 2026-09-07
 INSTRUCTOR: Antigravity AI
 ENVIRONMENT: EndeavourOS Host (read-only inspection)
-TASKS COMPLETED: D1 - Orientation (pwd, whoami, echo $0, cat /etc/*-release, uname -r / -v)
-HIGHEST HINT LEVEL: H4 (Diagnostic direction provided on `uname -r` vs `uname -v` and shell globbing)
-EVIDENCE REVIEWED: Terminal session outputs and search thought process submitted by learner.
+TASKS COMPLETED: 
+- D1: Orientation (pwd, whoami, echo $0, cat /etc/*-release, uname -r / -v)
+- D2: Files and Paths (Absolute vs Relative, File vs Directory, Hidden files/dotfiles, Root / vs Home ~)
+HIGHEST HINT LEVEL: H3 (Subsystem & conceptual clarification on file extensions in Linux and man search navigation)
+EVIDENCE REVIEWED:
+- Terminal session logs traversing `/home/muazislambabar`, `Claude-Projects`, and `/` root directory.
+- `ls -l`, `ls -la`, `ls -a`, `cd /`, `cd ~`, `cd ..`.
+- Observations on `d` vs `-` prefix in `ls -l` output.
 STRENGTHS:
-- High intellectual honesty and transparent problem-solving narrative.
-- Consulted man pages (`man uname`), local command help (`cat --help`), and official documentation (ArchWiki).
-- Successfully identified glob syntax error (`cat /etc/* -release` vs `cat /etc/*-release`).
-- Grasped the distinction between kernel version (`uname -v`) and kernel release (`uname -r`).
+- Solid conceptual mastery of absolute vs relative path logic and root `/` vs home `~`.
+- Successfully discovered and demonstrated `ls -a` / `ls -la` to expose hidden files.
+- Noticed leading `d` vs `-` in `ls -l` permissions string to distinguish directories from regular files.
+- High curiosity about Unix history (origin of dotfiles) and documented iterative attempts (`cd ..`, `cat`, etc.).
 WEAKNESSES:
-- Initial tendency to search Google/StackOverflow before testing local discovery tools (`apropos`, `man`, `--help`).
-- Trial of unverified commands without prior mental model check (e.g. `echo $0`).
+- Misconception that Linux requires dots/extensions to distinguish files from directories (clarified: extensions are arbitrary name conventions; filesystem metadata/inodes determine type).
+- Assumption that hidden files only have owner read-write permissions (clarified: dot denotes visibility, permissions are completely orthogonal).
+- Difficulty navigating long `man` pages (remediated with `/pattern` search technique inside pager).
 ERRORS CLASSIFIED:
-- COMMAND ERROR / SYNTAX: Extra space in `cat /etc/* -release` caused parameter misinterpretation as an option flag.
-- DOCUMENTATION / INTERPRETATION: Initial confusion between `uname -v` (kernel build timestamp/version) vs `uname -r` (kernel release number).
-SAFETY NOTES: All commands executed were non-destructive read-only host inspections.
-DOCUMENTATION USE: Active engagement with `man uname`, `cat --help`, and ArchWiki.
-VERIFICATION QUALITY: Solid; learner verified with actual terminal execution outputs.
-COMPETENCY IMPLICATIONS: Orientation demonstrated; ready for Task D2 (Files and Paths).
-REMEDIATION: Encourage using local man pages and `man -k` / `apropos` first before web searches.
-NEXT ACTION: Proceed to Task D2 (Files and Paths).
+- CONCEPTUAL ERROR: Believing file extensions determine file type in Linux.
+- PROCEDURAL ERROR: Trying `cd filename` and `. filename` on HTML file (corrected to `cat filename`).
+SAFETY NOTES: All commands executed were safe read-only operations on user host.
+DOCUMENTATION USE: Read `man ls` and investigated dotfile conventions.
+VERIFICATION QUALITY: High; verified each path transition and listing flag directly in interactive shell.
+COMPETENCY IMPLICATIONS: Ready for Task D3 (Streams and Redirection).
+REMEDIATION: Practice searching inside `man` using `/` and using the `file` command.
+NEXT ACTION: Proceed to Task D3 (Streams and Redirection).
 ```
 
 ## Current Status
 
-In Progress (Task D1 completed; Tasks D2–D7 remaining).
+In Progress (Tasks D1 & D2 completed; Tasks D3–D7 remaining).
