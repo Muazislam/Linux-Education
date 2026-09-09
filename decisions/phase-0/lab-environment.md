@@ -12,12 +12,12 @@ The learner uses EndeavourOS as the primary host. Dangerous Linux labs must not 
 
 ## Options
 
-| Option | Best For | Tradeoffs |
-|---|---|---|
-| GNOME Boxes | Simple VM workflow | Less advanced control |
-| VirtualBox | Familiar cross-platform VM management | Separate kernel modules and guest tooling |
-| virt-manager/QEMU/KVM | Strong Linux-native virtualization | Slightly more setup complexity |
-| Other | Existing learner preference | Must still support snapshots or easy rebuilds |
+| Option                | Best For                              | Tradeoffs                                     |
+| --------------------- | ------------------------------------- | --------------------------------------------- |
+| GNOME Boxes           | Simple VM workflow                    | Less advanced control                         |
+| VirtualBox            | Familiar cross-platform VM management | Separate kernel modules and guest tooling     |
+| virt-manager/QEMU/KVM | Strong Linux-native virtualization    | Slightly more setup complexity                |
+| Other                 | Existing learner preference           | Must still support snapshots or easy rebuilds |
 
 ## Decision Record
 
@@ -29,6 +29,7 @@ DOCKER STATUS: Installed and verified functional (ran hello-world container).
 HOST BACKUP STATUS: Pending verification before destructive labs.
 WEEKLY TIME BUDGET: ~20 hours/week (flexible based on full-stack web dev load).
 OPEN QUESTIONS: Snapshot configuration and virtual networking setup in virt-manager.
+Risk lab-environment: Disposable Arch VM**  Full‑risk labs (disk, boot, systemd).
 ```
 
 ## Next Action

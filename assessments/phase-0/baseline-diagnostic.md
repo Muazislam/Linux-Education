@@ -121,7 +121,7 @@ Competencies sampled: troubleshooting method, full-stack Linux integration.
 DATE: 2026-09-07
 INSTRUCTOR: Antigravity AI
 ENVIRONMENT: EndeavourOS Host (read-only inspection)
-TASKS COMPLETED: 
+TASKS COMPLETED:
 - D1: Orientation (pwd, whoami, echo $0, cat /etc/*-release, uname -r / -v)
 - D2: Files and Paths (Absolute vs Relative, File vs Directory, Hidden files/dotfiles, Root / vs Home ~)
 HIGHEST HINT LEVEL: H3 (Subsystem & conceptual clarification on file extensions in Linux and man search navigation)
