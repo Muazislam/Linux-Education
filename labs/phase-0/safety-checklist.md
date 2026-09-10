@@ -6,14 +6,14 @@ Complete this before any practical lab beyond harmless host inspection.
 
 ## System Boundaries
 
-| Item                                 | Learner Response                                                          | Verified |
-|--------------------------------------|---------------------------------------------------------------------------|----------|
-| Primary host operating system        | EndeavourOS                                                               | Yes (verified via `/etc/*-release`) |
-| Host is daily‑use system             | Yes                                                                       | Yes |
-| Disposable Arch VM exists            | VirtualBox VM **arch‑lab‑01** (Arch 7.2.4‑arch1‑2) boots to a root login prompt | Yes |
-| VM snapshot capability exists        | VirtualBox snapshot **phase‑0‑base** created and successfully restored (`VBoxManage snapshot arch‑lab‑01 take phase‑0‑base`) | Yes |
-| Docker is installed and usable       | Docker engine installed, `docker run hello‑world` succeeded               | Yes |
-| Backup strategy for important host data exists | rsync script copying `$HOME/Documents` (and test data) to USB; first run on 2026‑09‑10 | Yes |
+| Item                                           | Learner Response                                                                                                             | Verified                            |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| Primary host operating system                  | EndeavourOS                                                                                                                  | Yes (verified via `/etc/*-release`) |
+| Host is daily‑use system                       | Yes                                                                                                                          | Yes                                 |
+| Disposable Arch VM exists                      | VirtualBox VM **arch‑lab‑01** (Arch 7.2.4‑arch1‑2) boots to a root login prompt                                              | Yes                                 |
+| VM snapshot capability exists                  | VirtualBox snapshot **phase‑0‑base** created and successfully restored (`VBoxManage snapshot arch‑lab‑01 take phase‑0‑base`) | Yes                                 |
+| Docker is installed and usable                 | Docker engine installed, `docker run hello‑world` succeeded                                                                  | Yes                                 |
+| Backup strategy for important host data exists | rsync script copying `$HOME/Documents` (and test data) to USB; first run on 2026‑09‑10                                       | Yes                                 |
 
 ## Safety Rules
 
