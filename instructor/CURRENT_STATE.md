@@ -1,13 +1,13 @@
 # Current State
 
-Last updated: 2026-09-04
+Last updated: 2026-09-10
 
 ## Current Position
 
 - Current phase: Phase 0 - Environment, safety, and curriculum architecture.
-- Current module: Not started.
-- Current competency focus: Baseline diagnostic tasks (D2–D7 remaining).
-- Current lab state: `virt-manager` installed on host; Docker verified working.
+- Current module: Not started (Phase 0 active).
+- Current competency focus: Completing Phase 0 requirements (Safety Gate Done, Host Baseline Evidence Captured).
+- Current lab state: VirtualBox disposable VM `arch-lab-01` (Arch 7.2.4-arch1-2, CLI/headless) operational; snapshot `phase-0-base` verified; Docker functional; rsync backup verified.
 
 ## Demonstrated Evidence
 
@@ -15,19 +15,21 @@ Last updated: 2026-09-04
 - Demonstrated ability to read local man pages (`man uname`), command help (`cat --help`), and handle globbing syntax.
 - Demonstrated path navigation, relative vs absolute path mental model, directory listing flags (`ls -l`, `ls -la`, `ls -a`), and root `/` vs home `~`.
 - Docker operational verification (ran `hello-world` container).
+- VirtualBox disposable VM operation: created user `muaz`, took snapshot `phase-0-base`, created `/root/snapshot-test.txt`, successfully reverted to snapshot.
+- Host backup strategy: partitioned `/dev/sdc` as ext4, executed `rsync` with `--dry-run` and `--exclude='node_modules/'`, synchronized ~487 MB.
+- Comprehensive host diagnostic baseline telemetry captured and recorded in `evidence/phase-0/baseline.md`.
+- Safety checklist verified and closed in `labs/phase-0/safety-checklist.md`.
+- Privacy boundary configured via `.gitignore` and `private/` directory.
 
 ## Not Yet Demonstrated
 
-- Tasks D3–D7 of baseline diagnostic.
+- Tasks D3–D7 of baseline diagnostic (Streams & Redirection, Documentation-first problem, Process classification, Permission bits deep-dive, Troubleshooting scenario).
 - Shell quoting and expansion models.
-- Streams and redirection mechanics.
-- Process inspection and control.
-- systemd operation and troubleshooting.
-- Arch package management.
-- Networking diagnosis.
-- Backup and restore.
-- VM lab operation and snapshots.
-- Failure recovery.
+- Process inspection and signal control.
+- systemd unit creation and failure recovery.
+- Arch package building/troubleshooting.
+- Networking diagnosis and socket inspection.
+- Destructive lab recovery.
 
 ## Active Weaknesses
 
@@ -36,9 +38,8 @@ Last updated: 2026-09-04
 
 ## Unresolved Questions
 
-- Creation of disposable Arch VM and snapshot verification in `virt-manager`.
-- Host backup strategy confirmation.
+- None for Phase 0 infrastructure (VM, snapshots, Docker, backup, and baseline telemetry are all confirmed).
 
 ## Next Recommended Action
 
-Resume `assessments/phase-0/baseline-diagnostic.md` Task D3 (Streams and Redirection).
+Prompt learner for Phase 0 Baseline Diagnostic Task D3 (Streams and Redirection) or execute Phase 1 Kickoff (Unix/Linux Mental Model).

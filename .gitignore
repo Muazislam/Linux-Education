@@ -1,0 +1,13 @@
+# Private and sensitive data
+private/
+.secrets/
+*.env
+*.key
+*.pem
+*id_rsa*
+*.log
+
+# Editor & OS files
+*.swp
+*~
+.DS_Store
