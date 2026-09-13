@@ -8,8 +8,8 @@ Current evidence status: Initial Phase 0 baseline evidence demonstrated on host,
 
 | Competency | Level | Last Evidence | Instructor Note |
 |---|---:|---|---|
-| Documentation-first workflow | L2 | `man ls`, `cat --help`, `/pattern` man search | Can explain and navigate local manual pages. |
-| Shell basics | L3 | `pwd`, `whoami`, `echo $0`, `uname`, globbing | Can perform with guidance; basic commands and shell variables. |
+| Documentation-first workflow | L3 | `man -k streams`, `man stderr`, `/pattern` search | Can perform with guidance; uses `man -k` keyword search and navigates C library/POSIX manual pages. |
+| Shell basics | L3 | `pwd`, `whoami`, `echo $0`, file descriptors 0/1/2 | Understands standard streams (stdin, stdout, stderr), shell process wiring, and file descriptors. |
 | Filesystem navigation | L3 | `cd /`, `cd ~`, relative vs absolute paths, `ls -la` | Can perform independently; understands hierarchy and dotfiles. |
 | Permissions and ownership | L1 | `ls -l` inspection (directory `d` vs file `-`) | Can recognize; full permission model to be assessed in D6. |
 | Process inspection | L0 | None | To be assessed in D5. |
