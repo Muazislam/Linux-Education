@@ -118,37 +118,38 @@ Competencies sampled: troubleshooting method, full-stack Linux integration.
 ## Assessment Record
 
 ```text
-DATE: 2026-09-07
+DATE: 2026-09-19
 INSTRUCTOR: Antigravity AI
-ENVIRONMENT: EndeavourOS Host (read-only inspection)
+ENVIRONMENT: EndeavourOS Host (safe test directory ~/Downloads/ioPractice.tst)
 TASKS COMPLETED:
 - D1: Orientation (pwd, whoami, echo $0, cat /etc/*-release, uname -r / -v)
 - D2: Files and Paths (Absolute vs Relative, File vs Directory, Hidden files/dotfiles, Root / vs Home ~)
-HIGHEST HINT LEVEL: H3 (Subsystem & conceptual clarification on file extensions in Linux and man search navigation)
+- D3: Streams and Redirection (stdin/stdout/stderr, file descriptors 0/1/2, pipe | vs redirect >, truncate > vs append >>, stderr isolation 2>)
+HIGHEST HINT LEVEL: H3 (Conceptual guidance on shell syntax lookup in `man bash` and file descriptor duplication vs file redirection syntax)
 EVIDENCE REVIEWED:
-- Terminal session logs traversing `/home/muazislambabar`, `Claude-Projects`, and `/` root directory.
-- `ls -l`, `ls -la`, `ls -a`, `cd /`, `cd ~`, `cd ..`.
-- Observations on `d` vs `-` prefix in `ls -l` output.
+- Terminal session in `~/Downloads/ioPractice.tst`:
+  - `ls -la > ddirectory_context.txt` (verified with `cat`)
+  - `echo "I am Muaz!" >> ddirectory_context.txt` (verified with `cat`)
+  - `cat anime 2> errorlog` (verified stderr redirected to file, quiet screen)
+  - `cat errorlog` (verified contents: `cat: anime: No such file or directory`)
+  - Investigation of `man -k streams`, `man stderr`, `echo $SHELL`, and `man bash`
 STRENGTHS:
-- Solid conceptual mastery of absolute vs relative path logic and root `/` vs home `~`.
-- Successfully discovered and demonstrated `ls -a` / `ls -la` to expose hidden files.
-- Noticed leading `d` vs `-` in `ls -l` permissions string to distinguish directories from regular files.
-- High curiosity about Unix history (origin of dotfiles) and documented iterative attempts (`cd ..`, `cat`, etc.).
-WEAKNESSES:
-- Misconception that Linux requires dots/extensions to distinguish files from directories (clarified: extensions are arbitrary name conventions; filesystem metadata/inodes determine type).
-- Assumption that hidden files only have owner read-write permissions (clarified: dot denotes visibility, permissions are completely orthogonal).
-- Difficulty navigating long `man` pages (remediated with `/pattern` search technique inside pager).
-ERRORS CLASSIFIED:
-- CONCEPTUAL ERROR: Believing file extensions determine file type in Linux.
-- PROCEDURAL ERROR: Trying `cd filename` and `. filename` on HTML file (corrected to `cat filename`).
-SAFETY NOTES: All commands executed were safe read-only operations on user host.
-DOCUMENTATION USE: Read `man ls` and investigated dotfile conventions.
-VERIFICATION QUALITY: High; verified each path transition and listing flag directly in interactive shell.
-COMPETENCY IMPLICATIONS: Ready for Task D3 (Streams and Redirection).
-REMEDIATION: Practice searching inside `man` using `/` and using the `file` command.
-NEXT ACTION: Proceed to Task D3 (Streams and Redirection).
+- Recognized that `|` and `>` are shell grammar rather than standalone binary utilities; traced interpretation to `/bin/bash` via `echo $SHELL`.
+- Discovered and parsed authoritative documentation in `man bash` for pipelines, output redirection `[n]>word`, and appending `[n]>>word`.
+- Clear, correct mental model of the three standard streams (stdin 0, stdout 1, stderr 2) and their default bindings to keyboard/display.
+- Successfully demonstrated output truncation, appending, and isolating stderr into an error log.
+- High curiosity and persistence: spent significant time parsing dense local documentation (`man stderr`, `man bash`) instead of relying purely on web searches.
+CLARIFICATIONS & MISTAKES:
+- PROCEDURAL / SYNTAX: Attempted `2&1` to isolate errors, which caused bash to interpret `&` as a background job delimiter and attempt running `1` as a command (`bash: 1: command not found`). Clarified: redirecting stderr to stdout is `2>&1` (no spaces, with `>`). Redirecting stderr to a file is simply `2> filename`.
+- CONCEPTUAL: Conflated file descriptor numbers (0, 1, 2) with process exit codes (saw `[1]+ Exit 2` and wondered if exit 2 was because stderr is 2). Clarification: exit codes are integer return values (0 = success, non-zero = error) returned by the process to the parent shell, distinct from I/O stream file descriptors.
+SAFETY NOTES: All commands executed were non-destructive operations in an isolated test folder (`~/Downloads/ioPractice.tst`).
+DOCUMENTATION USE: Consulted `man -k`, `man stderr (3)`, and `man bash (1)`.
+VERIFICATION QUALITY: High; verified every file state with `cat` before and after redirection.
+COMPETENCY IMPLICATIONS: Task D3 passed with solid conceptual and practical competence.
+NEXT ACTION: Proceed to Task D4 (Documentation Use).
 ```
 
 ## Current Status
 
-In Progress (Tasks D1 & D2 completed; Tasks D3–D7 remaining).
+In Progress (Tasks D1, D2, and D3 completed; Tasks D4–D7 remaining).
+

@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-09-13
+Last updated: 2026-09-19
 
 ## Current Phase
 
@@ -25,11 +25,10 @@ Not started (Phase 0 active).
 - Privacy boundary established via `.gitignore` and untracked `private/` directory.
 - Phase 0 Baseline Diagnostic Task D1 (Orientation) completed.
 - Phase 0 Baseline Diagnostic Task D2 (Files and Paths) completed.
-- Phase 0 Baseline Diagnostic Task D3 (Streams & Redirection) conceptual groundwork: standard streams (`stdin`, `stdout`, `stderr`), file descriptors (`0`, `1`, `2`), POSIX standards, and keyword-based man-page discovery (`man -k`).
+- Phase 0 Baseline Diagnostic Task D3 (Streams & Redirection) fully completed (conceptual reasoning on stdin/stdout/stderr, pipes vs redirects, truncation vs appending, and practical demonstration in `~/Downloads/ioPractice.tst` with `2> errorlog`).
 
 ## Not Completed
 
-- Practical terminal demonstration of Task D3 (redirection operators `>`, `>>`, `2>`).
 - Tasks D4–D7 of Phase 0 baseline assessment in `assessments/phase-0/baseline-diagnostic.md` (Docs, Processes, Permissions, Troubleshooting).
 - Phase 0 retrospective and sign-off.
 - Module 1.
@@ -43,7 +42,8 @@ Not started (Phase 0 active).
 - Verified `rsync` dry-run and actual data transfer logs.
 - Host diagnostic telemetry recorded in `evidence/phase-0/baseline.md`.
 - Submitted terminal trace of `man -k streams` and 35-minute deep-dive on `man stderr (3)`.
+- Verified terminal output logs for `ls -la > ddirectory_context.txt`, `echo >> ddirectory_context.txt`, and `cat anime 2> errorlog`.
 
 ## Next Step
 
-Execute practical terminal commands for Task D3 (redirecting standard output, appending, and isolating stderr in `/tmp`).
+Proceed to Phase 0 Baseline Diagnostic Task D4 (Documentation Use).
