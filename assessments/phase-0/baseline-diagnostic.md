@@ -118,38 +118,44 @@ Competencies sampled: troubleshooting method, full-stack Linux integration.
 ## Assessment Record
 
 ```text
-DATE: 2026-09-19
+DATE: 2026-09-22
 INSTRUCTOR: Antigravity AI
-ENVIRONMENT: EndeavourOS Host (safe test directory ~/Downloads/ioPractice.tst)
+ENVIRONMENT: EndeavourOS Host (local manual extraction and non-destructive terminal testing)
 TASKS COMPLETED:
 - D1: Orientation (pwd, whoami, echo $0, cat /etc/*-release, uname -r / -v)
 - D2: Files and Paths (Absolute vs Relative, File vs Directory, Hidden files/dotfiles, Root / vs Home ~)
 - D3: Streams and Redirection (stdin/stdout/stderr, file descriptors 0/1/2, pipe | vs redirect >, truncate > vs append >>, stderr isolation 2>)
-HIGHEST HINT LEVEL: H3 (Conceptual guidance on shell syntax lookup in `man bash` and file descriptor duplication vs file redirection syntax)
+- D4: Documentation Use (Independent extraction via `wc --help` and local manual, flag analysis, edge cases, multi-flag verification)
+HIGHEST HINT LEVEL: H0 (Zero hints required; learner independently queried local documentation, explained functionality, and tested options)
 EVIDENCE REVIEWED:
-- Terminal session in `~/Downloads/ioPractice.tst`:
-  - `ls -la > ddirectory_context.txt` (verified with `cat`)
-  - `echo "I am Muaz!" >> ddirectory_context.txt` (verified with `cat`)
-  - `cat anime 2> errorlog` (verified stderr redirected to file, quiet screen)
-  - `cat errorlog` (verified contents: `cat: anime: No such file or directory`)
-  - Investigation of `man -k streams`, `man stderr`, `echo $SHELL`, and `man bash`
+- Accurate explanation of `wc` role (counting newlines, words, bytes; pipeline chaining in Unix workflows).
+- Identification of `-l` / `--lines` for newline counting.
+- Edge case analysis: identified `stdin` reading when no file or `-` is supplied; observed byte vs character count disparity in binary/UTF-8 files.
+- Terminal execution on `'Linux Fundamentals.pdf'`:
+  - `wc -l` (35661 newlines)
+  - `wc -m` (1629574 characters)
+  - `wc -c` (2744617 bytes)
+  - `wc -w` (64042 words)
+  - `wc -L` (1511 max display line length)
+  - `wc --debug` and parameter conflict error analysis on `--files0-from=F`
 STRENGTHS:
-- Recognized that `|` and `>` are shell grammar rather than standalone binary utilities; traced interpretation to `/bin/bash` via `echo $SHELL`.
-- Discovered and parsed authoritative documentation in `man bash` for pipelines, output redirection `[n]>word`, and appending `[n]>>word`.
-- Clear, correct mental model of the three standard streams (stdin 0, stdout 1, stderr 2) and their default bindings to keyboard/display.
-- Successfully demonstrated output truncation, appending, and isolating stderr into an error log.
-- High curiosity and persistence: spent significant time parsing dense local documentation (`man stderr`, `man bash`) instead of relying purely on web searches.
-CLARIFICATIONS & MISTAKES:
-- PROCEDURAL / SYNTAX: Attempted `2&1` to isolate errors, which caused bash to interpret `&` as a background job delimiter and attempt running `1` as a command (`bash: 1: command not found`). Clarified: redirecting stderr to stdout is `2>&1` (no spaces, with `>`). Redirecting stderr to a file is simply `2> filename`.
-- CONCEPTUAL: Conflated file descriptor numbers (0, 1, 2) with process exit codes (saw `[1]+ Exit 2` and wondered if exit 2 was because stderr is 2). Clarification: exit codes are integer return values (0 = success, non-zero = error) returned by the process to the parent shell, distinct from I/O stream file descriptors.
-SAFETY NOTES: All commands executed were non-destructive operations in an isolated test folder (`~/Downloads/ioPractice.tst`).
-DOCUMENTATION USE: Consulted `man -k`, `man stderr (3)`, and `man bash (1)`.
-VERIFICATION QUALITY: High; verified every file state with `cat` before and after redirection.
-COMPETENCY IMPLICATIONS: Task D3 passed with solid conceptual and practical competence.
-NEXT ACTION: Proceed to Task D4 (Documentation Use).
+- High autonomy: worked purely from local documentation without external web/AI lookups.
+- Explored multiple flags beyond the minimum requirement (`-l`, `-m`, `-c`, `-w`, `-L`, `--debug`, `--files0-from`).
+- Accurately distinguished newline counts from visual lines and understood command option syntax.
+- Recognized Unix pipeline composition (chaining small utilities together).
+CLARIFICATIONS:
+- Clarified why byte count (`-c`) differs from character count (`-m`) in modern systems (multi-byte UTF-8 encoding and binary file bytes).
+- Clarified the trap of `wc` with no arguments (hangs reading standard input from keyboard until EOF / Ctrl+D).
+- Clarified `--files0-from`: expects a file containing null-separated filenames, which conflicts with passing direct file arguments.
+SAFETY NOTES: All commands executed were read-only inspection commands on host files.
+DOCUMENTATION USE: Read `wc --help` and local manuals directly.
+VERIFICATION QUALITY: Very High; tested flags individually, observed parameter constraints, and validated counts.
+COMPETENCY IMPLICATIONS: Documentation-First Workflow achieved L4 (independent documentation extraction and application).
+NEXT ACTION: Proceed to Task D5 (Processes).
 ```
 
 ## Current Status
 
-In Progress (Tasks D1, D2, and D3 completed; Tasks D4–D7 remaining).
+In Progress (Tasks D1, D2, D3, and D4 completed; Tasks D5–D7 remaining).
+
 
