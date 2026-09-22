@@ -120,42 +120,35 @@ Competencies sampled: troubleshooting method, full-stack Linux integration.
 ```text
 DATE: 2026-09-22
 INSTRUCTOR: Antigravity AI
-ENVIRONMENT: EndeavourOS Host (local manual extraction and non-destructive terminal testing)
+ENVIRONMENT: EndeavourOS Host (interactive non-destructive process inspection)
 TASKS COMPLETED:
 - D1: Orientation (pwd, whoami, echo $0, cat /etc/*-release, uname -r / -v)
 - D2: Files and Paths (Absolute vs Relative, File vs Directory, Hidden files/dotfiles, Root / vs Home ~)
 - D3: Streams and Redirection (stdin/stdout/stderr, file descriptors 0/1/2, pipe | vs redirect >, truncate > vs append >>, stderr isolation 2>)
 - D4: Documentation Use (Independent extraction via `wc --help` and local manual, flag analysis, edge cases, multi-flag verification)
-HIGHEST HINT LEVEL: H0 (Zero hints required; learner independently queried local documentation, explained functionality, and tested options)
+- D5: Processes (Process lifecycle, disk presence vs memory execution, PID inspection, and resource telemetry)
+HIGHEST HINT LEVEL: H1 (Conceptual guidance mapping GUI instincts like Application Launcher and System Monitor to CLI tools `which`, `ps`, `pgrep`, `top`)
 EVIDENCE REVIEWED:
-- Accurate explanation of `wc` role (counting newlines, words, bytes; pipeline chaining in Unix workflows).
-- Identification of `-l` / `--lines` for newline counting.
-- Edge case analysis: identified `stdin` reading when no file or `-` is supplied; observed byte vs character count disparity in binary/UTF-8 files.
-- Terminal execution on `'Linux Fundamentals.pdf'`:
-  - `wc -l` (35661 newlines)
-  - `wc -m` (1629574 characters)
-  - `wc -c` (2744617 bytes)
-  - `wc -w` (64042 words)
-  - `wc -L` (1511 max display line length)
-  - `wc --debug` and parameter conflict error analysis on `--files0-from=F`
+- State A (Not installed): `which nginx` (verified negative search across all `$PATH` directories).
+- State B (Installed, not running): `which geogebra` (confirmed `/usr/bin/geogebra` on disk) and `pgrep -l geogebra` (confirmed no active PID in memory).
+- State C (Running normally): `which konsole` and `pgrep -l konsole` (verified active PID `73426`).
+- State D (Resource consumption): `top` live telemetry (captured load average, memory stats, and identified `firefox` PID 1851 at 32.7% CPU and `kwin_wayland` PID 1468 at 21.8% CPU).
+- Explored `pgrep --help` options and distinguished process IDs from command flags.
 STRENGTHS:
-- High autonomy: worked purely from local documentation without external web/AI lookups.
-- Explored multiple flags beyond the minimum requirement (`-l`, `-m`, `-c`, `-w`, `-L`, `--debug`, `--files0-from`).
-- Accurately distinguished newline counts from visual lines and understood command option syntax.
-- Recognized Unix pipeline composition (chaining small utilities together).
-CLARIFICATIONS:
-- Clarified why byte count (`-c`) differs from character count (`-m`) in modern systems (multi-byte UTF-8 encoding and binary file bytes).
-- Clarified the trap of `wc` with no arguments (hangs reading standard input from keyboard until EOF / Ctrl+D).
-- Clarified `--files0-from`: expects a file containing null-separated filenames, which conflicts with passing direct file arguments.
-SAFETY NOTES: All commands executed were read-only inspection commands on host files.
-DOCUMENTATION USE: Read `wc --help` and local manuals directly.
-VERIFICATION QUALITY: Very High; tested flags individually, observed parameter constraints, and validated counts.
-COMPETENCY IMPLICATIONS: Documentation-First Workflow achieved L4 (independent documentation extraction and application).
-NEXT ACTION: Proceed to Task D5 (Processes).
+- Rapid translation of existing conceptual knowledge into CLI commands.
+- Clear mental distinction between executable files on disk (`$PATH`) and running processes in RAM (PIDs).
+- Successfully identified live PIDs, parent shells, and resource-heavy processes.
+- Demonstrated curiosity by inspecting `pgrep --help` and testing option flags.
+SAFETY NOTES: All commands executed were read-only process and path queries on the host.
+DOCUMENTATION USE: Consulted `pgrep --help` and `top`.
+VERIFICATION QUALITY: Very High; tested negative states, positive states, and real-time process monitoring.
+COMPETENCY IMPLICATIONS: Process Inspection competency raised to L3 (Can perform with guidance and inspect active processes).
+NEXT ACTION: Proceed to Task D6 (Permissions Recognition).
 ```
 
 ## Current Status
 
-In Progress (Tasks D1, D2, D3, and D4 completed; Tasks D5–D7 remaining).
+In Progress (Tasks D1, D2, D3, D4, and D5 completed; Tasks D6–D7 remaining).
+
 
 

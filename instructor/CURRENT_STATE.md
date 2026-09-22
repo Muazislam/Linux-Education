@@ -6,7 +6,7 @@ Last updated: 2026-09-22
 
 - Current phase: Phase 0 - Environment, safety, and curriculum architecture.
 - Current module: Not started (Phase 0 active).
-- Current competency focus: Advancing through Baseline Diagnostic (Tasks D1–D4 completed; Task D5 next).
+- Current competency focus: Advancing through Baseline Diagnostic (Tasks D1–D5 completed; Task D6 next).
 - Current lab state: VirtualBox disposable VM `arch-lab-01` (Arch 7.2.4-arch1-2, CLI/headless) operational; snapshot `phase-0-base` verified; Docker functional; rsync backup verified.
 
 ## Demonstrated Evidence
@@ -22,12 +22,13 @@ Last updated: 2026-09-22
 - Privacy boundary configured via `.gitignore` and `private/` directory.
 - Task D3 fully completed: standard streams (`stdin 0`, `stdout 1`, `stderr 2`), pipeline `|` vs output redirection `>`, file truncation vs appending, and practical demonstration in `~/Downloads/ioPractice.tst` including isolating stderr with `2> errorlog`.
 - Task D4 fully completed with $H0$ independence: extracted `wc` usage directly from local manuals, evaluated flags (`-l`, `-m`, `-c`, `-w`, `-L`), diagnosed option constraints (`--files0-from`), and analyzed the `stdin` hang trap and UTF-8 multi-byte count divergence.
+- Task D5 fully completed: verified 4 process lifecycle states via `which` ($PATH binary lookup), `pgrep -l` (active vs inactive PIDs), and `top` (live CPU/MEM system telemetry).
 
 ## Not Yet Demonstrated
 
-- Tasks D5–D7 of baseline diagnostic (Process classification, Permission bits deep-dive, Troubleshooting scenario).
+- Tasks D6–D7 of baseline diagnostic (Permission bits deep-dive, Troubleshooting scenario).
 - Shell quoting and expansion models.
-- Process inspection and signal control.
+- Process signal control (kill/sigterm/sigkill).
 - systemd unit creation and failure recovery.
 - Arch package building/troubleshooting.
 - Networking diagnosis and socket inspection.
@@ -35,7 +36,7 @@ Last updated: 2026-09-22
 
 ## Active Weaknesses
 
-- None currently blocking; previous manual-page friction resolved through direct local documentation extraction.
+- None currently blocking; beginner process inspection friction resolved through mapping GUI mental models to CLI equivalents.
 
 ## Unresolved Questions
 
@@ -43,4 +44,4 @@ Last updated: 2026-09-22
 
 ## Next Recommended Action
 
-Prompt learner for Phase 0 Baseline Diagnostic Task D5 (Processes).
+Prompt learner for Phase 0 Baseline Diagnostic Task D6 (Permissions Recognition).
