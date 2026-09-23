@@ -19,6 +19,6 @@ Current evidence status: Initial Phase 0 baseline evidence demonstrated on host,
 | VM lab safety | L4 | VirtualBox `arch-lab-01` setup & `phase-0-base` rollback | Can perform independently; snapshot recovery proven. |
 | Docker fundamentals | L3 | `docker run hello-world` execution | Engine installed and operational on host. |
 | Backup and restore | L3 | `rsync -av` with `--exclude` to ext4 USB | Demonstrated dry-run, exclusions, and file copy. |
-| Troubleshooting reasoning | L2 | `/dev/sdc` journalctl diagnosis | Identified buffer I/O & ATA command errors from logs. |
+| Troubleshooting reasoning | L3 | `pgrep`, `ps aux | grep`, `ss -tulpin` (Task D7) | Can perform with guidance; inspects active sockets, links ports to PIDs, and forms falsifiable hypotheses. |
 
 Do not update a competency based only on self-reporting.

@@ -28,3 +28,6 @@
   process is alive).
   
   Share your hypotheses and how you would test them!
+
+
+  I would try to run the top command to see if the live server is consuming memory or not. ANd i then would run pgrep code to seee if vscode is running and taking space too. THis is my thought process and it came after the commands you showed me of ps/pgrep

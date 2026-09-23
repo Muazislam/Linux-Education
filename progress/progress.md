@@ -29,10 +29,10 @@ Not started (Phase 0 active).
 - Phase 0 Baseline Diagnostic Task D4 (Documentation Use) completed ($H0$ independent investigation of `wc`, flag analysis, stdin edge-case, and character/byte count distinctions).
 - Phase 0 Baseline Diagnostic Task D5 (Processes) completed: demonstrated 4 process states via `which` ($PATH lookup), `pgrep` (RAM PID presence/absence), and `top` (live CPU/MEM resource telemetry).
 - Phase 0 Baseline Diagnostic Task D6 (Permissions Recognition) completed: deconstructed file mode triads (`u`, `g`, `o`), identified owner/group associations, and explained directory execute traversal bit.
+- Phase 0 Baseline Diagnostic Task D7 (Troubleshooting Reasoning) completed: diagnosed unreachable local server via layered mental model, validated port listening via `ss -tulpin`, located live server processes, and observed kernel dmesg security boundaries.
 
 ## Not Completed
 
-- Task D7 of Phase 0 baseline assessment in `assessments/phase-0/baseline-diagnostic.md` (Troubleshooting Reasoning - Final Baseline Task).
 - Phase 0 retrospective and sign-off.
 - Module 1.
 
@@ -49,7 +49,8 @@ Not started (Phase 0 active).
 - Submitted execution traces of `wc -l`, `-m`, `-c`, `-w`, `-L`, `--debug` on `'Linux Fundamentals.pdf'` and error analysis on `--files0-from`.
 - Submitted execution traces for `which nginx`, `which geogebra` + `pgrep -l geogebra`, `which konsole` + `pgrep -l konsole`, and live `top` telemetry.
 - Submitted execution trace for `ls -ld ~/Downloads` demonstrating directory permissions (`drwxr-xr-x`).
+- Submitted execution trace for `ss -tulpn | grep 3000`, `ss -tulpin`, `pgrep -l live-server`, and `ps aux | grep -i server`.
 
 ## Next Step
 
-Proceed to Phase 0 Baseline Diagnostic Task D7 (Troubleshooting Reasoning - Final Task of Phase 0).
+Conduct Phase 0 retrospective, sign-off Phase 0, and kickoff Module 1 (Linux Architecture & Core Mental Model).

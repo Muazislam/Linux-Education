@@ -37,11 +37,8 @@
     inset: 0;
     pointer-events: none;
     background: repeating-linear-gradient(
-      0deg,
-      rgba(0,0,0,0.15) 0px,
-      rgba(0,0,0,0.15) 1px,
-      transparent 1px,
-      transparent 3px
+      0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px,
+      transparent 1px, transparent 3px
     );
     z-index: 999;
     opacity: 0.35;
@@ -54,22 +51,62 @@
     background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.4) 100%);
     z-index: 998;
   }
+
   .terminal-wrap { max-width: 1200px; margin: 0 auto; }
+
+  /* ── Titlebar with Tux ── */
   .titlebar {
     background: #161b22;
     border: 1px solid var(--border);
     border-bottom: none;
     border-radius: 8px 8px 0 0;
-    padding: 10px 14px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .tux-badge {
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  .dot { width: 11px; height: 11px; border-radius: 50%; }
-  .dot.red { background: #ff5f57; }
-  .dot.yellow { background: #febc2e; }
-  .dot.green { background: #28c840; }
-  .titlebar span.path { margin-left: 12px; font-size: 0.8rem; color: var(--text-dim); }
+  .tux-icon {
+    font-size: 1.3rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 4px rgba(57,255,136,0.6));
+  }
+  .tux-tags {
+    display: flex;
+    gap: 5px;
+  }
+  .tux-tag {
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    border: 1px solid;
+  }
+  .tux-tag.root   { color: var(--red);    border-color: var(--red);    background: rgba(255,92,87,0.08); }
+  .tux-tag.user   { color: var(--green);  border-color: var(--green);  background: rgba(57,255,136,0.08); }
+  .tux-tag.kernel { color: var(--arch-blue); border-color: var(--arch-blue); background: rgba(23,147,209,0.08); }
+  .titlebar .title-path {
+    margin-left: auto;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+  .title-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 0.9em;
+    background: var(--green);
+    margin-left: 3px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+    box-shadow: var(--glow-green);
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
   .screen {
     background: var(--bg-panel);
     border: 1px solid var(--border);
@@ -77,13 +114,23 @@
     padding: 28px 26px 40px;
     box-shadow: 0 0 40px rgba(57,255,136,0.06), inset 0 0 60px rgba(0,0,0,0.4);
   }
+
   .prompt-line { font-size: 0.9rem; color: var(--green); margin-bottom: 4px; }
   .prompt-line .user { color: var(--cyan); }
-  .prompt-line .path { color: var(--amber); }
+  .prompt-line .p { color: var(--amber); }
   .prompt-line::before { content: "λ "; color: var(--text-dim); }
+
   h1 { font-size: 1.7rem; margin: 18px 0 4px; color: var(--green); text-shadow: var(--glow-green); letter-spacing: 0.5px; }
   h1::before { content: "// "; color: var(--text-dim); text-shadow: none; }
   p.subtitle { color: var(--text-dim); margin: 0 0 28px; font-size: 0.85rem; }
+
+  /* neofetch stat strip */
+  .neofetch { display: flex; gap: 26px; flex-wrap: wrap; align-items: flex-start; margin-bottom: 26px; font-size: 0.78rem; }
+  .neofetch pre { color: var(--arch-blue); text-shadow: 0 0 6px rgba(23,147,209,0.6); line-height: 1.2; margin: 0; font-size: 0.68rem; }
+  .neofetch .stats div { margin-bottom: 3px; }
+  .neofetch .stats .k { color: var(--magenta); }
+  .neofetch .stats .v { color: var(--text); }
+
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .card { background: #0a0f16; border: 1px solid var(--border); border-radius: 6px; padding: 18px 16px 16px; }
   .card.full { grid-column: 1 / -1; }
@@ -97,40 +144,155 @@
     padding: 2px 6px; border-radius: 3px; text-shadow: none; font-weight: 700;
   }
   canvas { max-height: 300px; }
-  .heatmap-wrap { overflow-x: auto; }
-  table.heatmap { border-collapse: separate; border-spacing: 3px; width: 100%; font-size: 0.72rem; }
-  table.heatmap th { color: var(--text-dim); font-weight: 500; padding: 4px 8px; text-align: center; }
-  table.heatmap td.label { text-align: right; color: var(--amber); font-weight: 600; white-space: nowrap; padding-right: 10px; }
-  .cell { color: #04140a; font-weight: 800; border-radius: 4px; padding: 6px 4px; text-align: center; transition: transform 0.12s; font-size: 0.7rem; }
-  .cell:hover { transform: scale(1.12); outline: 1px solid var(--green); }
-  .neofetch { display: flex; gap: 26px; flex-wrap: wrap; align-items: flex-start; margin-bottom: 26px; font-size: 0.78rem; }
-  .neofetch pre { color: var(--arch-blue); text-shadow: 0 0 6px rgba(23,147,209,0.6); line-height: 1.1; margin: 0; font-size: 0.7rem; }
-  .neofetch .stats div { margin-bottom: 3px; }
-  .neofetch .stats .k { color: var(--magenta); }
-  .neofetch .stats .v { color: var(--text); }
+
+  /* ── GitHub-style VERTICAL heatmap ── */
+  .heatmap-scroll { overflow-y: auto; max-height: 600px; }
+  .gh-heatmap { width: 100%; border-collapse: separate; border-spacing: 4px; font-size: 0.72rem; }
+
+  /* sticky column headers so they stay visible while scrolling */
+  .gh-heatmap thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #0a0f16;
+    color: var(--cyan);
+    font-weight: 700;
+    padding: 6px 8px 10px;
+    text-align: center;
+    white-space: nowrap;
+    border-bottom: 1px dashed var(--border);
+    font-size: 0.68rem;
+    letter-spacing: 0.3px;
+  }
+  .gh-heatmap thead th.row-label-header {
+    color: var(--text-dim);
+    text-align: right;
+    font-weight: 500;
+  }
+
+  /* row label = date/session */
+  .gh-heatmap td.row-label {
+    text-align: right;
+    color: var(--amber);
+    font-weight: 600;
+    white-space: nowrap;
+    padding-right: 10px;
+    font-size: 0.68rem;
+  }
+  .gh-heatmap td.row-label .session-num {
+    color: var(--text-dim);
+    font-size: 0.6rem;
+    display: block;
+  }
+
+  /* data cells */
+  .gh-cell {
+    border-radius: 4px;
+    padding: 8px 6px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 0.69rem;
+    transition: transform 0.12s, outline 0.12s;
+    cursor: default;
+    min-width: 80px;
+    color: #030c05;
+    position: relative;
+  }
+  .gh-cell:hover {
+    transform: scale(1.08);
+    outline: 1px solid var(--green);
+    z-index: 5;
+  }
+
+  /* tooltip on hover */
+  .gh-cell::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e2530;
+    color: var(--text);
+    font-size: 0.62rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 20;
+    font-weight: 500;
+  }
+  .gh-cell:hover::after { opacity: 1; }
+
+  /* legend strip */
+  .heatmap-legend {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+  }
+  .legend-strip {
+    display: flex;
+    gap: 3px;
+  }
+  .legend-cell {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+  }
+
   ::selection { background: var(--green); color: #000; }
+
+  /* phase badge on heatmap rows */
+  .phase-badge {
+    display: inline-block;
+    font-size: 0.55rem;
+    padding: 1px 5px;
+    border-radius: 2px;
+    margin-top: 2px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  .phase-0 { background: rgba(57,255,136,0.15); color: var(--green); border: 1px solid rgba(57,255,136,0.3); }
+  .phase-1 { background: rgba(86,216,255,0.15); color: var(--cyan); border: 1px solid rgba(86,216,255,0.3); }
+  .phase-2 { background: rgba(255,180,84,0.15); color: var(--amber); border: 1px solid rgba(255,180,84,0.3); }
 </style>
 </head>
 <body>
 <div class="terminal-wrap">
+
   <div class="titlebar">
-    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
-    <span class="path">muazislambabar@endeavouros:~/learning/progress</span>
+    <div class="tux-badge">
+      <span class="tux-icon">🐧</span>
+      <div class="tux-tags">
+        <span class="tux-tag kernel">linux</span>
+        <span class="tux-tag user">learner</span>
+        <span class="tux-tag root">phase-0</span>
+      </div>
+    </div>
+    <span class="title-path">muazislambabar@endeavouros:~/progress<span class="title-cursor"></span></span>
   </div>
+
   <div class="screen">
-    <div class="prompt-line"><span class="user">muazislambabar@endeavouros</span>:<span class="path">~/progress</span>$ cat dashboard.log</div>
+    <div class="prompt-line"><span class="user">muazislambabar@endeavouros</span>:<span class="p">~/progress</span>$ cat dashboard.log</div>
     <h1>PROGRESS_DASHBOARD.SH</h1>
-    <p class="subtitle">auto-generated // arch linux + programming learning track — phase 0</p>
+    <p class="subtitle">auto-generated // arch linux + programming learning track</p>
+
     <div class="neofetch">
-      <pre>       /\
-      /  \
-     /\   \
-    /      \
-   /   ,,   \
-  /   |  |  -\
- /_-''    ''-_\</pre>
+      <pre>        .--.
+       |o_o |
+       |:_/ |
+      //   \ \
+     (|     | )
+    /'\_   _/`\
+    \___)=(___/</pre>
       <div class="stats" id="neofetchStats"></div>
     </div>
+
     <div class="grid">
       <div class="card">
         <h2>trend --over-time <span class="tag">LINE</span></h2>
@@ -141,8 +303,11 @@
         <canvas id="barChart"></canvas>
       </div>
       <div class="card full">
-        <h2>heatmap --variable-x-session <span class="tag">GRID</span></h2>
-        <div class="heatmap-wrap" id="heatmapContainer"></div>
+        <h2>heatmap --sessions-x-variables <span class="tag">GRID</span></h2>
+        <div class="heatmap-scroll">
+          <table class="gh-heatmap" id="ghHeatmap"></table>
+        </div>
+        <div class="heatmap-legend" id="heatmapLegend"></div>
       </div>
     </div>
   </div>
@@ -151,70 +316,109 @@
 <script>
 /* ============================================================
    1) EDIT THIS DATA ONLY — everything below it is fixed logic
+   ============================================================
+
+   HOW TO ADD A NEW SESSION:
+     Just append a new object to progressData with:
+       date          — "YYYY-MM-DD"
+       phase         — "0", "1", "2", etc. (used for row badge colour)
+       task          — short label for the task done, e.g. "D7 Troubleshooting"
+       tasksCompleted — cumulative count across ALL phases (just keep going up)
+       competencyAvg  — average L-level across tracked competencies (0–7)
+       hintLevel      — highest H-level used this session (0 = independent, 7 = full answer)
+       sessionsTotal  — cumulative session count
+
+   HOW TO ADD A NEW VARIABLE (column):
+     1. Add the key to each progressData object (put 0 or null if not yet tracked)
+     2. Add the key to variableLabels with a label and unit
+   That's it — the heatmap, line chart, and bar chart all update automatically.
    ============================================================ */
 
 const progressData = [
-  { date: "2026-08-26", tasksCompleted: 0, competencyAvg: 0, hintLevel: 0, sessionsTotal: 1 },
-  { date: "2026-09-04", tasksCompleted: 1, competencyAvg: 1, hintLevel: 1, sessionsTotal: 2 },
-  { date: "2026-09-07", tasksCompleted: 2, competencyAvg: 1, hintLevel: 1, sessionsTotal: 3 },
-  { date: "2026-09-10", tasksCompleted: 2, competencyAvg: 2, hintLevel: 2, sessionsTotal: 4 },
-  { date: "2026-09-13", tasksCompleted: 2, competencyAvg: 2, hintLevel: 2, sessionsTotal: 5 },
-  { date: "2026-09-19", tasksCompleted: 3, competencyAvg: 2, hintLevel: 3, sessionsTotal: 6 },
-  { date: "2026-09-22", tasksCompleted: 4, competencyAvg: 3, hintLevel: 0, sessionsTotal: 7 },
-  { date: "2026-09-22", tasksCompleted: 5, competencyAvg: 3, hintLevel: 1, sessionsTotal: 8 },
-  { date: "2026-09-23", tasksCompleted: 6, competencyAvg: 3, hintLevel: 2, sessionsTotal: 9 }
+  { date: "2026-08-26", phase: "0", task: "Repo Architecture",     tasksCompleted: 0, competencyAvg: 0, hintLevel: 0, sessionsTotal: 1 },
+  { date: "2026-09-04", phase: "0", task: "D1 Orientation",        tasksCompleted: 1, competencyAvg: 1, hintLevel: 1, sessionsTotal: 2 },
+  { date: "2026-09-07", phase: "0", task: "D2 Files & Paths",      tasksCompleted: 2, competencyAvg: 1, hintLevel: 1, sessionsTotal: 3 },
+  { date: "2026-09-10", phase: "0", task: "VM / Snapshots / Rsync",tasksCompleted: 2, competencyAvg: 2, hintLevel: 2, sessionsTotal: 4 },
+  { date: "2026-09-13", phase: "0", task: "Streams & Man Pages",   tasksCompleted: 2, competencyAvg: 2, hintLevel: 2, sessionsTotal: 5 },
+  { date: "2026-09-19", phase: "0", task: "D3 Redirection",        tasksCompleted: 3, competencyAvg: 2, hintLevel: 3, sessionsTotal: 6 },
+  { date: "2026-09-22", phase: "0", task: "D4 Docs (wc) H0",       tasksCompleted: 4, competencyAvg: 3, hintLevel: 0, sessionsTotal: 7 },
+  { date: "2026-09-22", phase: "0", task: "D5 Processes",          tasksCompleted: 5, competencyAvg: 3, hintLevel: 1, sessionsTotal: 8 },
+  { date: "2026-09-23", phase: "0", task: "D6 Permissions",        tasksCompleted: 6, competencyAvg: 3, hintLevel: 2, sessionsTotal: 9 },
+  { date: "2026-09-23", phase: "0", task: "D7 Troubleshooting",    tasksCompleted: 7, competencyAvg: 3, hintLevel: 1, sessionsTotal: 10 }
 ];
 
 const variableLabels = {
-  tasksCompleted: { label: "Tasks Completed", unit: "/7" },
-  competencyAvg:  { label: "Competency Avg",  unit: "/7" },
-  hintLevel:      { label: "Hint Level Used", unit: "" },
-  sessionsTotal:  { label: "Sessions Total",  unit: "" }
+  tasksCompleted: { label: "Tasks Done",       unit: "" },
+  competencyAvg:  { label: "Competency Avg",   unit: "/7" },
+  hintLevel:      { label: "Hint Level",       unit: "" },
+  sessionsTotal:  { label: "Sessions",         unit: "" }
 };
 
 /* ============================================================
    2) FIXED LOGIC — do not edit below this line
    ============================================================ */
 
-const palette = ["#39ff88", "#56d8ff", "#ffb454", "#ff6ec7", "#1793d1", "#ff5c57"];
-const keys = Object.keys(variableLabels);
-const dates = progressData.map(d => d.date);
-const latest = progressData[progressData.length - 1];
-const first = progressData[0];
+const palette  = ["#39ff88","#56d8ff","#ffb454","#ff6ec7","#1793d1","#ff5c57"];
+const keys     = Object.keys(variableLabels);
+const dates    = progressData.map(d => d.date);
+const latest   = progressData[progressData.length - 1];
 
-const streak = progressData.length;
+/* ── Heatmap colour palettes per variable (low → high) ── */
+const heatPalettes = {
+  tasksCompleted: [[10,40,30],[57,255,136],[86,216,255],[255,180,84],[255,110,199]],
+  competencyAvg:  [[10,40,30],[23,147,209],[86,216,255],[255,180,84],[255,110,199]],
+  hintLevel:      [[57,255,136],[86,216,255],[255,180,84],[255,92,87],[180,30,30]], // green=good(0), red=bad(7)
+  sessionsTotal:  [[10,40,30],[57,255,136],[86,216,255],[255,180,84],[255,110,199]]
+};
+const defaultPalette = [[10,40,30],[57,255,136],[86,216,255],[255,180,84],[255,110,199]];
+
+function interpolateColor(stops, norm) {
+  const scaled = norm * (stops.length - 1);
+  const i = Math.min(Math.floor(scaled), stops.length - 2);
+  const t = scaled - i;
+  const c = stops[i].map((v, idx) => Math.round(v + t * (stops[i+1][idx] - v)));
+  return { css: `rgb(${c[0]},${c[1]},${c[2]})`, r: c[0], g: c[1], b: c[2] };
+}
+
+function textColorFor(r, g, b) {
+  const lum = (0.299*r + 0.587*g + 0.114*b) / 255;
+  return lum > 0.45 ? '#030c05' : '#c9d1d9';
+}
+
+/* ── neofetch stat strip ── */
 const statsHtml = keys.map(k =>
   `<div><span class="k">${variableLabels[k].label}:</span> <span class="v">${latest[k]}${variableLabels[k].unit}</span></div>`
-).join("") + `<div><span class="k">Sessions logged:</span> <span class="v">${streak}</span></div>` +
-  `<div><span class="k">Last updated:</span> <span class="v">${latest.date}</span></div>`;
+).join("") +
+  `<div><span class="k">Sessions logged:</span> <span class="v">${progressData.length}</span></div>` +
+  `<div><span class="k">Last updated:</span>    <span class="v">${latest.date}</span></div>` +
+  `<div><span class="k">Current phase:</span>   <span class="v">Phase ${latest.phase}</span></div>`;
 document.getElementById('neofetchStats').innerHTML = statsHtml;
 
+/* ── Line chart ── */
 new Chart(document.getElementById('lineChart'), {
   type: 'line',
   data: {
-    labels: dates,
+    labels: progressData.map(d => d.task || d.date),
     datasets: keys.map((k, i) => ({
       label: variableLabels[k].label,
       data: progressData.map(d => d[k]),
       borderColor: palette[i % palette.length],
       backgroundColor: palette[i % palette.length] + "22",
-      tension: 0.3,
-      fill: true,
-      pointRadius: 3,
-      pointBackgroundColor: palette[i % palette.length],
-      borderWidth: 2
+      tension: 0.3, fill: true, pointRadius: 3,
+      pointBackgroundColor: palette[i % palette.length], borderWidth: 2
     }))
   },
   options: {
     responsive: true,
-    plugins: { legend: { labels: { color: "#c9d1d9", font: { family: "'JetBrains Mono'", size: 11 } } } },
+    plugins: { legend: { labels: { color:"#c9d1d9", font:{ family:"'JetBrains Mono'", size:11 } } } },
     scales: {
-      x: { ticks: { color: "#6e7681", font: { family: "'JetBrains Mono'", size: 10 } }, grid: { color: "rgba(30,37,48,0.7)" } },
-      y: { ticks: { color: "#6e7681", font: { family: "'JetBrains Mono'", size: 10 } }, grid: { color: "rgba(30,37,48,0.7)" } }
+      x: { ticks:{ color:"#6e7681", font:{ family:"'JetBrains Mono'", size:9 }, maxRotation:35 }, grid:{ color:"rgba(30,37,48,0.7)" } },
+      y: { ticks:{ color:"#6e7681", font:{ family:"'JetBrains Mono'", size:10 } }, grid:{ color:"rgba(30,37,48,0.7)" } }
     }
   }
 });
 
+/* ── Bar chart (latest snapshot) ── */
 new Chart(document.getElementById('barChart'), {
   type: 'bar',
   data: {
@@ -228,44 +432,97 @@ new Chart(document.getElementById('barChart'), {
   },
   options: {
     responsive: true,
-    plugins: { legend: { display: false } },
+    plugins: { legend:{ display:false } },
     scales: {
-      x: { ticks: { color: "#6e7681", font: { family: "'JetBrains Mono'", size: 10 } }, grid: { display: false } },
-      y: { ticks: { color: "#6e7681", font: { family: "'JetBrains Mono'", size: 10 } }, grid: { color: "rgba(30,37,48,0.7)" } }
+      x: { ticks:{ color:"#6e7681", font:{ family:"'JetBrains Mono'", size:10 } }, grid:{ display:false } },
+      y: { ticks:{ color:"#6e7681", font:{ family:"'JetBrains Mono'", size:10 } }, grid:{ color:"rgba(30,37,48,0.7)" } }
     }
   }
 });
 
-function colorForValue(norm) {
-  const stops = [
-    [10, 40, 30],
-    [57, 255, 136],
-    [86, 216, 255],
-    [255, 180, 84]
-  ];
-  const scaled = norm * (stops.length - 1);
-  const i = Math.min(Math.floor(scaled), stops.length - 2);
-  const t = scaled - i;
-  const c = stops[i].map((v, idx) => Math.round(v + t * (stops[i + 1][idx] - v)));
-  return `rgb(${c[0]},${c[1]},${c[2]})`;
-}
+/* ── Vertical GitHub-style heatmap ──
+   Rows    = sessions (oldest at top, newest at bottom — grows down automatically)
+   Columns = variables
+   Each column is normalised independently so each metric uses its own full colour range.
+   hintLevel palette is inverted: 0 (green) is best, 7 (red) is worst.
+*/
+(function buildHeatmap() {
+  const table = document.getElementById('ghHeatmap');
 
-const heatmapDiv = document.getElementById('heatmapContainer');
-let html = "<table class='heatmap'><tr><th></th>" +
-  dates.map(d => `<th>${d}</th>`).join("") + "</tr>";
-
-keys.forEach(k => {
-  const values = progressData.map(d => d[k]);
-  const min = Math.min(...values), max = Math.max(...values);
-  html += `<tr><td class="label">${variableLabels[k].label}</td>`;
-  values.forEach(v => {
-    const norm = max === min ? 1 : (v - min) / (max - min);
-    html += `<td class="cell" style="background:${colorForValue(norm)}">${v}${variableLabels[k].unit}</td>`;
+  // column min/max per variable
+  const colStats = {};
+  keys.forEach(k => {
+    const vals = progressData.map(d => d[k] ?? 0);
+    colStats[k] = { min: Math.min(...vals), max: Math.max(...vals) };
   });
-  html += "</tr>";
-});
-html += "</table>";
-heatmapDiv.innerHTML = html;
+
+  // Phase badge colours
+  const phaseBadge = { "0":"phase-0", "1":"phase-1", "2":"phase-2" };
+
+  // Header row
+  const thead = document.createElement('thead');
+  let headerRow = '<tr>';
+  headerRow += `<th class="row-label-header">session / date</th>`;
+  keys.forEach(k => {
+    headerRow += `<th>${variableLabels[k].label}</th>`;
+  });
+  headerRow += '</tr>';
+  thead.innerHTML = headerRow;
+  table.appendChild(thead);
+
+  // Data rows — one row per session
+  const tbody = document.createElement('tbody');
+  progressData.forEach((d, idx) => {
+    const row = document.createElement('tr');
+
+    // Row label cell
+    const labelCell = document.createElement('td');
+    labelCell.className = 'row-label';
+    const badgeClass = phaseBadge[d.phase] || 'phase-0';
+    labelCell.innerHTML =
+      `${d.date}<span class="session-num">#${idx+1} — ${d.task || ''}</span>` +
+      `<span class="phase-badge ${badgeClass}">phase-${d.phase}</span>`;
+    row.appendChild(labelCell);
+
+    // Data cells
+    keys.forEach(k => {
+      const val = d[k] ?? 0;
+      const { min, max } = colStats[k];
+      const norm = max === min ? 1 : (val - min) / (max - min);
+      const stops = heatPalettes[k] || defaultPalette;
+      const col = interpolateColor(stops, norm);
+      const txtCol = textColorFor(col.r, col.g, col.b);
+
+      const cell = document.createElement('td');
+      cell.className = 'gh-cell';
+      cell.style.background = col.css;
+      cell.style.color = txtCol;
+      cell.setAttribute('data-tip', `${variableLabels[k].label}: ${val}${variableLabels[k].unit}`);
+      cell.textContent = `${val}${variableLabels[k].unit}`;
+      row.appendChild(cell);
+    });
+
+    tbody.appendChild(row);
+  });
+  table.appendChild(tbody);
+
+  // Legend strip
+  const legendDiv = document.getElementById('heatmapLegend');
+  legendDiv.innerHTML = '<span>low</span>';
+  const strip = document.createElement('div');
+  strip.className = 'legend-strip';
+  const steps = 8;
+  for (let s = 0; s <= steps; s++) {
+    const norm = s / steps;
+    const col = interpolateColor(defaultPalette, norm);
+    const lc = document.createElement('div');
+    lc.className = 'legend-cell';
+    lc.style.background = col.css;
+    strip.appendChild(lc);
+  }
+  legendDiv.appendChild(strip);
+  legendDiv.innerHTML += '<span>high</span><span style="margin-left:20px;color:var(--red)">note: hint level is inverted — lower = more independent 🐧</span>';
+})();
 </script>
 </body>
 </html>
