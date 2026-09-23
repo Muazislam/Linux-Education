@@ -118,37 +118,40 @@ Competencies sampled: troubleshooting method, full-stack Linux integration.
 ## Assessment Record
 
 ```text
-DATE: 2026-09-22
+DATE: 2026-09-23
 INSTRUCTOR: Antigravity AI
-ENVIRONMENT: EndeavourOS Host (interactive non-destructive process inspection)
+ENVIRONMENT: EndeavourOS Host (local non-destructive permissions inspection)
 TASKS COMPLETED:
 - D1: Orientation (pwd, whoami, echo $0, cat /etc/*-release, uname -r / -v)
 - D2: Files and Paths (Absolute vs Relative, File vs Directory, Hidden files/dotfiles, Root / vs Home ~)
 - D3: Streams and Redirection (stdin/stdout/stderr, file descriptors 0/1/2, pipe | vs redirect >, truncate > vs append >>, stderr isolation 2>)
 - D4: Documentation Use (Independent extraction via `wc --help` and local manual, flag analysis, edge cases, multi-flag verification)
 - D5: Processes (Process lifecycle, disk presence vs memory execution, PID inspection, and resource telemetry)
-HIGHEST HINT LEVEL: H1 (Conceptual guidance mapping GUI instincts like Application Launcher and System Monitor to CLI tools `which`, `ps`, `pgrep`, `top`)
+- D6: Permissions Recognition (File mode deconstruction, read/write/execute triplet model for user/group/other, directory traverse execution bit)
+HIGHEST HINT LEVEL: H2 (Conceptual clarification on the three triplet entities: user, group, other, and the meaning of the execute bit on directories)
 EVIDENCE REVIEWED:
-- State A (Not installed): `which nginx` (verified negative search across all `$PATH` directories).
-- State B (Installed, not running): `which geogebra` (confirmed `/usr/bin/geogebra` on disk) and `pgrep -l geogebra` (confirmed no active PID in memory).
-- State C (Running normally): `which konsole` and `pgrep -l konsole` (verified active PID `73426`).
-- State D (Resource consumption): `top` live telemetry (captured load average, memory stats, and identified `firefox` PID 1851 at 32.7% CPU and `kwin_wayland` PID 1468 at 21.8% CPU).
-- Explored `pgrep --help` options and distinguished process IDs from command flags.
+- Accurate deconstruction of `-rw-r--r--`:
+  - Leading `-` indicates regular file.
+  - Three triplets mapped to User/Owner (`rw-`), Group (`r--`), and Others/World (`r--`).
+  - `r` = read, `w` = write, `-` = permission not granted.
+- Identified file owner (`muazislambabar`) and file group (`muazislambabar`) from `ls -l` columns.
+- Explained directory execute permission (`x` on directories enables directory traversal / entry via `cd`, not executable binary execution).
+- Verified against live terminal inspection: `ls -ld ~/Downloads` showing `drwxr-xr-x 1 muazislambabar muazislambabar`.
 STRENGTHS:
-- Rapid translation of existing conceptual knowledge into CLI commands.
-- Clear mental distinction between executable files on disk (`$PATH`) and running processes in RAM (PIDs).
-- Successfully identified live PIDs, parent shells, and resource-heavy processes.
-- Demonstrated curiosity by inspecting `pgrep --help` and testing option flags.
-SAFETY NOTES: All commands executed were read-only process and path queries on the host.
-DOCUMENTATION USE: Consulted `pgrep --help` and `top`.
-VERIFICATION QUALITY: Very High; tested negative states, positive states, and real-time process monitoring.
-COMPETENCY IMPLICATIONS: Process Inspection competency raised to L3 (Can perform with guidance and inspect active processes).
-NEXT ACTION: Proceed to Task D6 (Permissions Recognition).
+- Solid conceptual synthesis once mapped to the three permission triplets (User, Group, Other).
+- Quickly validated real filesystem attributes on `~/Downloads` (`drwxr-xr-x`).
+- Successfully navigated documentation search mechanics with `man -k` (discovered need for quoting multi-word phrases like `man -k "file mode"`).
+SAFETY NOTES: All commands executed were read-only directory and file listings (`ls -l`, `ls -ld`).
+DOCUMENTATION USE: Searched local manuals for permission strings (`chmod`, `access`, `cgroup`, and `man -k`).
+VERIFICATION QUALITY: High; verified directly against live directory mode strings on host.
+COMPETENCY IMPLICATIONS: Permissions and ownership competency raised to L3 (Can perform with guidance and explain standard UNIX permission triads).
+NEXT ACTION: Proceed to Task D7 (Troubleshooting Reasoning).
 ```
 
 ## Current Status
 
-In Progress (Tasks D1, D2, D3, D4, and D5 completed; Tasks D6–D7 remaining).
+In Progress (Tasks D1–D6 completed; Task D7 remaining - final baseline diagnostic task).
+
 
 
 

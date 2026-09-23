@@ -11,7 +11,7 @@ Current evidence status: Initial Phase 0 baseline evidence demonstrated on host,
 | Documentation-first workflow | L4 | `wc --help`, `man wc` (Task D4 H0) | Can perform independently; extracts command syntax, flags, and edge cases directly from local manuals without external lookups. |
 | Shell basics | L4 | `ls > file`, `echo >> file`, `cat 2> errorlog` | Can perform independently; masters redirection (`>`, `>>`, `2>`), file descriptors (0, 1, 2), and pipeline concepts. |
 | Filesystem navigation | L3 | `cd /`, `cd ~`, relative vs absolute paths, `ls -la` | Can perform independently; understands hierarchy and dotfiles. |
-| Permissions and ownership | L1 | `ls -l` inspection (directory `d` vs file `-`) | Can recognize; full permission model to be assessed in D6. |
+| Permissions and ownership | L3 | `ls -l`, `ls -ld ~/Downloads` (Task D6) | Can perform with guidance; deconstructs user/group/other permission triplets and understands directory traversal execution. |
 | Process inspection | L3 | `which`, `pgrep -l`, `ps`, `top` (Task D5) | Can perform with guidance; inspects active PIDs, distinguishes disk binaries from RAM execution, and monitors live resource consumption. |
 | Service troubleshooting | L1 | `systemctl list-units --state=failed` inspection | Inspected failed units; full service management pending. |
 | Network diagnosis | L1 | `ip addr show`, `ip route` host inspection | Can inspect interfaces and routes; diagnostic reasoning pending. |

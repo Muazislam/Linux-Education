@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-09-22
+Last updated: 2026-09-23
 
 ## Current Phase
 
@@ -28,10 +28,11 @@ Not started (Phase 0 active).
 - Phase 0 Baseline Diagnostic Task D3 (Streams & Redirection) fully completed (conceptual reasoning on stdin/stdout/stderr, pipes vs redirects, truncation vs appending, and practical demonstration in `~/Downloads/ioPractice.tst` with `2> errorlog`).
 - Phase 0 Baseline Diagnostic Task D4 (Documentation Use) completed ($H0$ independent investigation of `wc`, flag analysis, stdin edge-case, and character/byte count distinctions).
 - Phase 0 Baseline Diagnostic Task D5 (Processes) completed: demonstrated 4 process states via `which` ($PATH lookup), `pgrep` (RAM PID presence/absence), and `top` (live CPU/MEM resource telemetry).
+- Phase 0 Baseline Diagnostic Task D6 (Permissions Recognition) completed: deconstructed file mode triads (`u`, `g`, `o`), identified owner/group associations, and explained directory execute traversal bit.
 
 ## Not Completed
 
-- Tasks D6–D7 of Phase 0 baseline assessment in `assessments/phase-0/baseline-diagnostic.md` (Permissions, Troubleshooting).
+- Task D7 of Phase 0 baseline assessment in `assessments/phase-0/baseline-diagnostic.md` (Troubleshooting Reasoning - Final Baseline Task).
 - Phase 0 retrospective and sign-off.
 - Module 1.
 
@@ -47,7 +48,8 @@ Not started (Phase 0 active).
 - Verified terminal output logs for `ls -la > ddirectory_context.txt`, `echo >> ddirectory_context.txt`, and `cat anime 2> errorlog`.
 - Submitted execution traces of `wc -l`, `-m`, `-c`, `-w`, `-L`, `--debug` on `'Linux Fundamentals.pdf'` and error analysis on `--files0-from`.
 - Submitted execution traces for `which nginx`, `which geogebra` + `pgrep -l geogebra`, `which konsole` + `pgrep -l konsole`, and live `top` telemetry.
+- Submitted execution trace for `ls -ld ~/Downloads` demonstrating directory permissions (`drwxr-xr-x`).
 
 ## Next Step
 
-Proceed to Phase 0 Baseline Diagnostic Task D6 (Permissions Recognition).
+Proceed to Phase 0 Baseline Diagnostic Task D7 (Troubleshooting Reasoning - Final Task of Phase 0).
