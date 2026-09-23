@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>~/progress.sh</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e14;
+    --bg-panel: #0d1117;
+    --border: #1e2530;
+    --green: #39ff88;
+    --cyan: #56d8ff;
+    --arch-blue: #1793d1;
+    --amber: #ffb454;
+    --magenta: #ff6ec7;
+    --red: #ff5c57;
+    --text: #c9d1d9;
+    --text-dim: #6e7681;
+    --glow-green: 0 0 8px rgba(57,255,136,0.5);
+    --glow-cyan: 0 0 8px rgba(86,216,255,0.5);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    background: var(--bg);
+    color: var(--text);
+    padding: 28px 20px 60px;
+    position: relative;
+    min-height: 100vh;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.15) 0px,
+      rgba(0,0,0,0.15) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    z-index: 999;
+    opacity: 0.35;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.4) 100%);
+    z-index: 998;
+  }
+  .terminal-wrap { max-width: 1200px; margin: 0 auto; }
+  .titlebar {
+    background: #161b22;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .dot.red { background: #ff5f57; }
+  .dot.yellow { background: #febc2e; }
+  .dot.green { background: #28c840; }
+  .titlebar span.path { margin-left: 12px; font-size: 0.8rem; color: var(--text-dim); }
+  .screen {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 0 0 8px 8px;
+    padding: 28px 26px 40px;
+    box-shadow: 0 0 40px rgba(57,255,136,0.06), inset 0 0 60px rgba(0,0,0,0.4);
+  }
+  .prompt-line { font-size: 0.9rem; color: var(--green); margin-bottom: 4px; }
+  .prompt-line .user { color: var(--cyan); }
+  .prompt-line .path { color: var(--amber); }
+  .prompt-line::before { content: "λ "; color: var(--text-dim); }
+  h1 { font-size: 1.7rem; margin: 18px 0 4px; color: var(--green); text-shadow: var(--glow-green); letter-spacing: 0.5px; }
+  h1::before { content: "// "; color: var(--text-dim); text-shadow: none; }
+  p.subtitle { color: var(--text-dim); margin: 0 0 28px; font-size: 0.85rem; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .card { background: #0a0f16; border: 1px solid var(--border); border-radius: 6px; padding: 18px 16px 16px; }
+  .card.full { grid-column: 1 / -1; }
+  .card h2 {
+    margin: 0 0 16px; font-size: 0.9rem; font-weight: 500; color: var(--cyan);
+    text-shadow: var(--glow-cyan); display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px dashed var(--border); padding-bottom: 10px;
+  }
+  .card h2 .tag {
+    color: var(--bg); background: var(--cyan); font-size: 0.65rem;
+    padding: 2px 6px; border-radius: 3px; text-shadow: none; font-weight: 700;
+  }
+  canvas { max-height: 300px; }
+  .heatmap-wrap { overflow-x: auto; }
+  table.heatmap { border-collapse: separate; border-spacing: 3px; width: 100%; font-size: 0.72rem; }
+  table.heatmap th { color: var(--text-dim); font-weight: 500; padding: 4px 8px; text-align: center; }
+  table.heatmap td.label { text-align: right; color: var(--amber); font-weight: 600; white-space: nowrap; padding-right: 10px; }
+  .cell { color: #04140a; font-weight: 800; border-radius: 4px; padding: 6px 4px; text-align: center; transition: transform 0.12s; font-size: 0.7rem; }
+  .cell:hover { transform: scale(1.12); outline: 1px solid var(--green); }
+  .neofetch { display: flex; gap: 26px; flex-wrap: wrap; align-items: flex-start; margin-bottom: 26px; font-size: 0.78rem; }
+  .neofetch pre { color: var(--arch-blue); text-shadow: 0 0 6px rgba(23,147,209,0.6); line-height: 1.1; margin: 0; font-size: 0.7rem; }
+  .neofetch .stats div { margin-bottom: 3px; }
+  .neofetch .stats .k { color: var(--magenta); }
+  .neofetch .stats .v { color: var(--text); }
+  ::selection { background: var(--green); color: #000; }
+</style>
+</head>
+<body>
+<div class="terminal-wrap">
+  <div class="titlebar">
+    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+    <span class="path">muazislambabar@endeavouros:~/learning/progress</span>
+  </div>
+  <div class="screen">
+    <div class="prompt-line"><span class="user">muazislambabar@endeavouros</span>:<span class="path">~/progress</span>$ cat dashboard.log</div>
+    <h1>PROGRESS_DASHBOARD.SH</h1>
+    <p class="subtitle">auto-generated // arch linux + programming learning track — phase 0</p>
+    <div class="neofetch">
+      <pre>       /\
+      /  \
+     /\   \
+    /      \
+   /   ,,   \
+  /   |  |  -\
+ /_-''    ''-_\</pre>
+      <div class="stats" id="neofetchStats"></div>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h2>trend --over-time <span class="tag">LINE</span></h2>
+        <canvas id="lineChart"></canvas>
+      </div>
+      <div class="card">
+        <h2>snapshot --latest <span class="tag">BAR</span></h2>
+        <canvas id="barChart"></canvas>
+      </div>
+      <div class="card full">
+        <h2>heatmap --variable-x-session <span class="tag">GRID</span></h2>
+        <div class="heatmap-wrap" id="heatmapContainer"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   1) EDIT THIS DATA ONLY — everything below it is fixed logic
+   ============================================================ */
+
+const progressData = [
+  { date: "2026-08-26", tasksCompleted: 0, competencyAvg: 0, hintLevel: 0, sessionsTotal: 1 },
+  { date: "2026-09-04", tasksCompleted: 1, competencyAvg: 1, hintLevel: 1, sessionsTotal: 2 },
+  { date: "2026-09-07", tasksCompleted: 2, competencyAvg: 1, hintLevel: 1, sessionsTotal: 3 },
+  { date: "2026-09-10", tasksCompleted: 2, competencyAvg: 2, hintLevel: 2, sessionsTotal: 4 },
+  { date: "2026-09-13", tasksCompleted: 2, competencyAvg: 2, hintLevel: 2, sessionsTotal: 5 },
+  { date: "2026-09-19", tasksCompleted: 3, competencyAvg: 2, hintLevel: 3, sessionsTotal: 6 },
+  { date: "2026-09-22", tasksCompleted: 4, competencyAvg: 3, hintLevel: 0, sessionsTotal: 7 },
+  { date: "2026-09-22", tasksCompleted: 5, competencyAvg: 3, hintLevel: 1, sessionsTotal: 8 },
+  { date: "2026-09-23", tasksCompleted: 6, competencyAvg: 3, hintLevel: 2, sessionsTotal: 9 }
+];
+
+const variableLabels = {
+  tasksCompleted: { label: "Tasks Completed", unit: "/7" },
+  competencyAvg:  { label: "Competency Avg",  unit: "/7" },
+  hintLevel:      { label: "Hint Level Used", unit: "" },
+  sessionsTotal:  { label: "Sessions Total",  unit: "" }
+};
+
+/* ============================================================
+   2) FIXED LOGIC — do not edit below this line
+   ============================================================ */
+
+const palette = ["#39ff88", "#56d8ff", "#ffb454", "#ff6ec7", "#1793d1", "#ff5c57"];
+const keys = Object.keys(variableLabels);
+const dates = progressData.map(d => d.date);
+const latest = progressData[progressData.length - 1];
+const first = progressData[0];
+
+const streak = progressData.length;
+const statsHtml = keys.map(k =>
+  `<div><span class="k">${variableLabels[k].label}:</span> <span class="v">${latest[k]}${variableLabels[k].unit}</span></div>`
+).join("") + `<div><span class="k">Sessions logged:</span> <span class="v">${streak}</span></div>` +
+  `<div><span class="k">Last updated:</span> <span class="v">${latest.date}</span></div>`;
+document.getElementById('neofetchStats').innerHTML = statsHtml;
+
+new Chart(document.getElementById('lineChart'), {
+  type: 'line',
+  data: {
+    labels: dates,
+    datasets: keys.map((k, i) => ({
+      label: variableLabels[k].label,
+      data: progressData.map(d => d[k]),
+      borderColor: palette[i % palette.length],
+      backgroundColor: palette[i % palette.length] + "22",
+      tension: 0.3,
+      fill: true,
+      pointRadius: 3,
+      pointBackgroundColor: palette[i % palette.length],
+      borderWidth: 2
+    }))
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { labels: { color: "#c9d1d9", font: { family: "'JetBrains Mono'", size: 11 } } } },
+    scales: {
+      x: { ticks: { color: "#6e7681", font: { family: "'JetBrains Mono'", size: 10 } }, grid: { color: "rgba(30,37,48,0.7)" } },
+      y: { ticks: { color: "#6e7681", font: { family: "'JetBrains Mono'", size: 10 } }, grid: { color: "rgba(30,37,48,0.7)" } }
+    }
+  }
+});
+
+new Chart(document.getElementById('barChart'), {
+  type: 'bar',
+  data: {
+    labels: keys.map(k => variableLabels[k].label),
+    datasets: [{
+      label: "Latest value",
+      data: keys.map(k => latest[k]),
+      backgroundColor: keys.map((_, i) => palette[i % palette.length]),
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { ticks: { color: "#6e7681", font: { family: "'JetBrains Mono'", size: 10 } }, grid: { display: false } },
+      y: { ticks: { color: "#6e7681", font: { family: "'JetBrains Mono'", size: 10 } }, grid: { color: "rgba(30,37,48,0.7)" } }
+    }
+  }
+});
+
+function colorForValue(norm) {
+  const stops = [
+    [10, 40, 30],
+    [57, 255, 136],
+    [86, 216, 255],
+    [255, 180, 84]
+  ];
+  const scaled = norm * (stops.length - 1);
+  const i = Math.min(Math.floor(scaled), stops.length - 2);
+  const t = scaled - i;
+  const c = stops[i].map((v, idx) => Math.round(v + t * (stops[i + 1][idx] - v)));
+  return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+
+const heatmapDiv = document.getElementById('heatmapContainer');
+let html = "<table class='heatmap'><tr><th></th>" +
+  dates.map(d => `<th>${d}</th>`).join("") + "</tr>";
+
+keys.forEach(k => {
+  const values = progressData.map(d => d[k]);
+  const min = Math.min(...values), max = Math.max(...values);
+  html += `<tr><td class="label">${variableLabels[k].label}</td>`;
+  values.forEach(v => {
+    const norm = max === min ? 1 : (v - min) / (max - min);
+    html += `<td class="cell" style="background:${colorForValue(norm)}">${v}${variableLabels[k].unit}</td>`;
+  });
+  html += "</tr>";
+});
+html += "</table>";
+heatmapDiv.innerHTML = html;
+</script>
+</body>
+</html>

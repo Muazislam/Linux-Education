@@ -12,10 +12,17 @@
   Drawing on everything you've learned so far (and your experience with web           
   development), answer these two questions:
   
-  1. What are 3 or 4 possible hypotheses (reasons) why the page won't load?           
+  1. What are 3 or 4 possible hypotheses (reasons) why the page won't load?   
+    ```
+    It will not load either because: the live server didn't start.
+    - the device memory is consumed elsewhere
+- 
+
+    ```
+    ***        
   (e.g., Is the server running? Is it on the right port? Is there a network/firewall  
   issue?)
-  2. What commands or evidence would you check in Linux to prove which hypothesis is  
+  1. What commands or evidence would you check in Linux to prove which hypothesis is  
   true?
   (Think about tools we've practiced like ps/pgrep, terminal logs, or checking if the 
   process is alive).
