@@ -5,7 +5,7 @@
 ![Bash](https://img.shields.io/badge/Shell-Bash-4EAA25?style=flat-square)
 ![Docker](https://img.shields.io/badge/Container-Docker-2496ED?style=flat-square)
 ![QEMU/KVM](https://img.shields.io/badge/Virtualization-QEMU%2FKVM-FF6600?style=flat-square)
-![Status](https://img.shields.io/badge/Status-Phase%200%20Active-brightgreen?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Phase%201%20Ready-brightgreen?style=flat-square)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 > A persistent, evidence-backed, long-term learning system and engineering portfolio for Linux, Unix, systems administration, troubleshooting, and Arch Linux.

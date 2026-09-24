@@ -1,6 +1,6 @@
 # Phase 0 - Environment, Safety, Repository Protocol, Baseline
 
-Last updated: 2026-08-26
+Last updated: 2026-09-25
 
 ## Purpose
 
@@ -31,15 +31,15 @@ Phase 0 is complete only when all of the following are recorded:
 
 | ID | Task | Output | Status |
 |---|---|---|---|
-| P0-T1 | Review curriculum architecture | Accepted changes or questions | Not started |
-| P0-T2 | Choose weekly Linux time budget | Progress note | Not started |
-| P0-T3 | Choose disposable VM tool | `decisions/phase-0/lab-environment.md` | Not started |
-| P0-T4 | Check Docker availability | Evidence record | Not started |
-| P0-T5 | Confirm host safety boundaries | `labs/phase-0/safety-checklist.md` | Not started |
-| P0-T6 | Learn evidence/reporting format | `evidence/phase-0/sample-evidence.md` | Not started |
-| P0-T7 | Review chat and learning-record workflow | `instructor/CHAT_INTERFACE.md` and `IMPLEMENTATION_PLAN.md` | Not started |
-| P0-T8 | Complete baseline diagnostic | `assessments/phase-0/baseline-diagnostic.md` | Not started |
-| P0-T9 | Update progress and next module | `progress/progress.md` and `instructor/CURRENT_STATE.md` | Not started |
+| P0-T1 | Review curriculum architecture | Accepted changes or questions | Complete |
+| P0-T2 | Choose weekly Linux time budget | Progress note | Complete |
+| P0-T3 | Choose disposable VM tool | `decisions/phase-0/lab-environment.md` | Complete |
+| P0-T4 | Check Docker availability | Evidence record | Complete |
+| P0-T5 | Confirm host safety boundaries | `labs/phase-0/safety-checklist.md` | Complete |
+| P0-T6 | Learn evidence/reporting format | `evidence/phase-0/sample-evidence.md` | Complete |
+| P0-T7 | Review chat and learning-record workflow | `instructor/CHAT_INTERFACE.md` and `IMPLEMENTATION_PLAN.md` | Complete |
+| P0-T8 | Complete baseline diagnostic | `assessments/phase-0/baseline-diagnostic.md` | Complete |
+| P0-T9 | Update progress and next module | `progress/progress.md` and `instructor/CURRENT_STATE.md` | Complete |
 
 ## Required Decisions
 
@@ -81,6 +81,10 @@ The baseline is diagnostic, not punitive. It determines where Module 1 should st
 
 Use Socratic prompting during the diagnostic. Record the highest hint level needed. Do not mark competencies above L0 unless the learner provides evidence. Self-reported familiarity may be noted, but it does not raise mastery level.
 
+## Sign-off
+
+Phase 0 signed off on 2026-09-25. All exit criteria are recorded across the decision, safety, evidence, assessment, progress, and instructor-state records. See `retrospectives/monthly/2026-09-phase-0-review.md`.
+
 ## Next Phase
 
-After Phase 0 exits cleanly, begin Phase 1: Unix/Linux mental model.
+Phase 1: Unix/Linux mental model. Module 1 is ready to begin.

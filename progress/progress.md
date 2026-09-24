@@ -1,14 +1,14 @@
 # Progress
 
-Last updated: 2026-09-23
+Last updated: 2026-09-25
 
 ## Current Phase
 
-Phase 0 - Environment, safety, and curriculum architecture.
+Phase 1 - Unix/Linux mental model.
 
 ## Current Module
 
-Not started (Phase 0 active).
+Module 1 - Unix/Linux Mental Model (not started; kickoff next).
 
 ## Completed
 
@@ -30,10 +30,10 @@ Not started (Phase 0 active).
 - Phase 0 Baseline Diagnostic Task D5 (Processes) completed: demonstrated 4 process states via `which` ($PATH lookup), `pgrep` (RAM PID presence/absence), and `top` (live CPU/MEM resource telemetry).
 - Phase 0 Baseline Diagnostic Task D6 (Permissions Recognition) completed: deconstructed file mode triads (`u`, `g`, `o`), identified owner/group associations, and explained directory execute traversal bit.
 - Phase 0 Baseline Diagnostic Task D7 (Troubleshooting Reasoning) completed: diagnosed unreachable local server via layered mental model, validated port listening via `ss -tulpin`, located live server processes, and observed kernel dmesg security boundaries.
+- Phase 0 retrospective and sign-off completed on 2026-09-25; Phase 1 is now ready to begin.
 
 ## Not Completed
 
-- Phase 0 retrospective and sign-off.
 - Module 1.
 
 ## Evidence
@@ -53,4 +53,4 @@ Not started (Phase 0 active).
 
 ## Next Step
 
-Conduct Phase 0 retrospective, sign-off Phase 0, and kickoff Module 1 (Linux Architecture & Core Mental Model).
+Kick off Module 1: Unix/Linux Mental Model, beginning with kernel vs userspace, processes, files, and system boundaries.

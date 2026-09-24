@@ -1,6 +1,6 @@
 # Hint And Independence Tracking
 
-Last updated: 2026-08-26
+Last updated: 2026-09-25
 
 The goal is not merely task completion. The goal is reduced dependency on instructor hints over time.
 
@@ -38,4 +38,5 @@ Repeated H6/H7 support or repeated inability to choose evidence means the compet
 
 | Date | Task | Competency | Highest Hint | Independence Note | Follow-up |
 |---|---|---|---:|---|---|
-| TBD | Baseline diagnostic | Multiple | TBD | Pending | Complete Phase 0 |
+| 2026-09-22 | D4 Documentation Use | Documentation | H0 | Independently extracted `wc` behavior, flags, constraints, and edge cases from local documentation. | Reassess in Module 1 |
+| 2026-09-23 | D7 Troubleshooting Reasoning | Troubleshooting | H1 | Needed one clarifying prompt to test the localhost:3000 hypothesis; then selected and interpreted `pgrep`, `ps`, and `ss` evidence. | Repeat independently in Module 1 |
