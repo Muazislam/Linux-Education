@@ -1,43 +1,56 @@
 I am thinking of running this commands on the file that is useless.
 
-Then answer in your own words:
-Which command gives evidence about the kernel?
 
-```
-uname -a gives wvidence about kernel.
-It says 7.2.4-arch1-2 #1. I think it is the kernel. Instead of x86_64 GNU/Linux.
-```
 
 What is PID 1, and why is it important?
 
-```
-i DON't know what this is. But this is relevant to systemd. I think systemd is maybe my own laptop endavouros, 7.2.4 arch1 -2. And the command section in PID is refering to the folders in my system. but the --switched-root and --system --deserialize=58 is about the commands that can be run, i think this is because this is how i see commands running. So, tell me if i am right or wrong.
-```
-
-Is your shell a process? What evidence proves it?
+``PID 1 is the first process that runs in my system. It is my linux device itself that the device starts this is why is it systemd. This is why it is important`
 
 ```
-My shell is a process because it has a PID, if something has a PID, it means that that process is running and consuming ram.
-```
+
 
 What relationship exists between your shell and PID 1?
 
 ```
-The PID1 is maybe showing that the system is running (my endavouros) and the shell is the system itself, i can do anychanges in my operating system using shell. So, this might be the relationship.
+The PID1 is the system itself that the system is running. And the shell is a process that is running within that system. We can assume that this is like a heirerichal tree that
+
+PID1 running
+    |
+    shell
 ```
 
 Why are /proc, /sys, /dev, and /run different from an ordinary directory such as /home?
 
 ```
-They are different because they contain system files and working data. ABout all the instructions that the system has and apps installed in the system. And the /home etc files are the directories where i can place my user data.
+These directories are different because /proc gprovides (process and kernel info). It is a virtual system created in the computers memory by the kernel. And it contains information about active programs(processes) and system hardware like CPU.
+
+The /sys (system and device attributes). It is a structural virtual file system called sysfs. It contains information about device trees, and kernel settings. User can even read and change system settings here, like changing screen brightness or CPU sppeed.
+
+The /dev (device files) is a directory holding special files for hardware devices. It contains interfaces for hard drives(/sda), webcams(/video0) or the mouse so programs can use them.
+
+The /run (runtime variable data). is a temporary file system (usually stored in RAM as a tmpfs.) It is short-term data for processes that started up since the last boot, such as active service IDs (PIDs) or login socket files.
+
+
+I honestly searched these things definition online because i have never studied them before. THis is my first time learning about them
 ```
 
 Which observations come from the kernel, and which come from userspace tools?
 
 ```
-The kernel is about showing the kernel number, the last update system had. The architecture and the linux installed in the device. The device name too.
-as for the userspace tool
+The kernel owns and maintains the underlying system state. Userspace commands such as uname, ps and ls request or read that state and present to me
 
-i guess you mean  ls -ld /proc /sys /dev /run /home
-this command.. SO, it is showing the files and it shows the permissions it has in each and the dates and numbers.
+```
+
+```
+    ~ 
+    ❯ ps -p 1 -o pid,ppid,comm,args
+        PID    PPID COMMAND         COMMAND
+        1       0 systemd         /usr/lib/systemd/systemd --switched-root --system --deserialize=59
+
+
+    ~ 
+    ❯ ps -p "$$" -o pid,ppid,comm,args
+        PID    PPID COMMAND         COMMAND
+    5171    5156 bash            /bin/bash
+
 ```

@@ -1,12 +1,12 @@
 # Current State
 
-Last updated: 2026-09-25
+Last updated: 2026-09-27
 
 ## Current Position
 
 - Current phase: Phase 1 - Unix/Linux Mental Model.
-- Current module: Module 1 not yet started; Phase 1 kickoff is next.
-- Current competency focus: Phase 1 entry assessment and Unix/Linux mental model.
+- Current module: Module 1 - Unix/Linux Mental Model (active).
+- Current competency focus: Task 2 - process hierarchy and kernel/userspace boundaries.
 - Current lab state: VirtualBox disposable VM `arch-lab-01` (Arch 7.2.4-arch1-2, CLI/headless) operational; snapshot `phase-0-base` verified; Docker functional; rsync backup verified.
 
 ## Demonstrated Evidence
@@ -25,6 +25,7 @@ Last updated: 2026-09-25
 - Task D5 fully completed: verified 4 process lifecycle states via `which` ($PATH binary lookup), `pgrep -l` (active vs inactive PIDs), and `top` (live CPU/MEM system telemetry).
 - Task D6 fully completed: deconstructed `-rw-r--r--` and `drwxr-xr-x` permission mode strings into User/Group/Other triads, identified owner/group associations, and explained the traversal mechanics of the directory execute bit.
 - Task D7 fully completed: diagnosed a local web-server failure by separating process, port, and browser hypotheses; verified listeners with `ss`, located live processes with `pgrep`/`ps`, and recorded the `dmesg` privilege boundary.
+- Module 1 Task 1 completed with guidance: identified PID 1 as the systemd userspace init process, distinguished it from the kernel and operating system, interpreted the shell's PID/PPID, and described `/proc`, `/sys`, `/dev`, and `/run` as distinct kernel/runtime interfaces.
 
 ## Not Yet Demonstrated
 
@@ -45,4 +46,4 @@ Last updated: 2026-09-25
 
 ## Next Recommended Action
 
-Begin Phase 1 / Module 1 with the Unix/Linux mental model entry session.
+Complete Module 1 Task 2: draw and verify the actual process hierarchy from PID 1 to the current shell.

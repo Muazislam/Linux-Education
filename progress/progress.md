@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-09-25
+Last updated: 2026-09-27
 
 ## Current Phase
 
@@ -8,7 +8,7 @@ Phase 1 - Unix/Linux mental model.
 
 ## Current Module
 
-Module 1 - Unix/Linux Mental Model (not started; kickoff next).
+Module 1 - Unix/Linux Mental Model (Task 1 complete; Task 2 next).
 
 ## Completed
 
@@ -31,6 +31,7 @@ Module 1 - Unix/Linux Mental Model (not started; kickoff next).
 - Phase 0 Baseline Diagnostic Task D6 (Permissions Recognition) completed: deconstructed file mode triads (`u`, `g`, `o`), identified owner/group associations, and explained directory execute traversal bit.
 - Phase 0 Baseline Diagnostic Task D7 (Troubleshooting Reasoning) completed: diagnosed unreachable local server via layered mental model, validated port listening via `ss -tulpin`, located live server processes, and observed kernel dmesg security boundaries.
 - Phase 0 retrospective and sign-off completed on 2026-09-25; Phase 1 is now ready to begin.
+- Module 1 Task 1 completed on 2026-09-27: explained PID 1/systemd, shell PID and PPID, and the different roles of `/proc`, `/sys`, `/dev`, and `/run` after instructor correction.
 
 ## Not Completed
 
@@ -50,7 +51,8 @@ Module 1 - Unix/Linux Mental Model (not started; kickoff next).
 - Submitted execution traces for `which nginx`, `which geogebra` + `pgrep -l geogebra`, `which konsole` + `pgrep -l konsole`, and live `top` telemetry.
 - Submitted execution trace for `ls -ld ~/Downloads` demonstrating directory permissions (`drwxr-xr-x`).
 - Submitted execution trace for `ss -tulpn | grep 3000`, `ss -tulpin`, `pgrep -l live-server`, and `ps aux | grep -i server`.
+- Submitted Module 1 Task 1 reasoning and process evidence: `ps -p 1 -o pid,ppid,comm,args` and `ps -p "$$" -o pid,ppid,comm,args` (shell PID/PPID evidence).
 
 ## Next Step
 
-Kick off Module 1: Unix/Linux Mental Model, beginning with kernel vs userspace, processes, files, and system boundaries.
+Complete Module 1 Task 2: verify the process hierarchy between PID 1, the terminal/session process, and the current shell.
