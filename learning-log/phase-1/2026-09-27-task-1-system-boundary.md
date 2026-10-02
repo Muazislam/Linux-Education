@@ -17,7 +17,7 @@ ps -p 1 -o pid,ppid,comm,args
 PID  PPID COMMAND  COMMAND
 1    0    systemd   /usr/lib/systemd/systemd --switched-root --system --deserialize=59
 
-ps -p "$" -o pid,ppid,comm,args
+ps -p "$$" -o pid,ppid,comm,args
 PID  PPID COMMAND  COMMAND
 5171 5156 bash      /bin/bash
 ```
