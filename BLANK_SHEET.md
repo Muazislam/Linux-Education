@@ -1,13 +1,83 @@
-PID 1:
-PID 1 is _______
-PID 1 is the first userspace process started by the kernel. It is important because it initializes and manages system services, adopts orphaned processes, and participates in shutdown and reboot.
+## Task 3: Compare persistent, virtual, and runtime filesystems
 
-COMMAND PROCESS:
-pstree is an external program. Bash starts it as a child process, so it recieves it's own PID. It reads process relationship and displays them as a tree.
+**Target:** HOST  
+**Risk:** Read-only. Do not use `sudo`, write to `/sys`, or modify any files.
 
-A PID identifies a process currently known to the kernel. It doesn't tell me how much RAM the process uses. Memory usage must be measured seperately.
+### Objective
 
-A PID is not related to whether software is downloaded or installed. The same PID number may be reused later for a different process, but two active processes cannot normally use the same PID at the same time.
+Understand why `/home` behaves differently from `/proc`, `/sys`, `/dev`, and `/run`.
 
+Run:
 
-This is the answer that chatgpt codex generated on my previous answers. So, i want to mention that i am re writing them. But I would mention that, i understand them but articulating them into proper words is a little difficult for me. I hope that with firther sessions and tasks, i become good at articulating.
+```bash
+findmnt -T /home -o TARGET,SOURCE,FSTYPE,OPTIONS
+findmnt -T /proc -o TARGET,SOURCE,FSTYPE,OPTIONS
+findmnt -T /sys -o TARGET,SOURCE,FSTYPE,OPTIONS
+findmnt -T /dev -o TARGET,SOURCE,FSTYPE,OPTIONS
+findmnt -T /run -o TARGET,SOURCE,FSTYPE,OPTIONS
+```
+
+Then inspect examples:
+
+```bash
+ls -ld /home /proc /sys /dev /run
+ls -ld /proc/$$
+ls -l /dev/null
+```
+
+Use local documentation:
+
+```bash
+man findmnt
+man 5 proc
+man 5 sysfs
+man 4 null
+```
+
+Search inside the manuals for:
+
+```text
+/filesystem
+/mounted
+/virtual
+/device
+```
+
+### Think through these questions
+
+1. What filesystem type is `/home` using?
+    ```
+    /home is using /"home
+    ```
+2. What filesystem types are `/proc`, `/sys`, `/dev`, and `/run` using?
+3. Which directory primarily stores persistent user data?
+4. Which directories are generated or populated by the kernel or boot process?
+5. Why does `/proc/$$` correspond to your current shell?
+6. Why is `/dev/null` a device interface rather than an ordinary text file?
+7. Which contents would you expect to disappear or change after reboot?
+
+Use this report:
+
+```text
+OBJECTIVE:
+COMMANDS USED:
+
+FILESYSTEM COMPARISON:
+- /home:
+- /proc:
+- /sys:
+- /dev:
+- /run:
+
+IMPORTANT OUTPUT:
+
+INTERPRETATION:
+
+WHAT I EXPECTED:
+
+WHAT SURPRISED ME:
+
+UNRESOLVED QUESTIONS:
+```
+
+Do not search for definitions first. Start with the command output, then use the manuals to explain what you observed.

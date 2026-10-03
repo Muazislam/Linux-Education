@@ -1,12 +1,12 @@
 # Current State
 
-Last updated: 2026-09-27
+Last updated: 2026-10-03
 
 ## Current Position
 
 - Current phase: Phase 1 - Unix/Linux Mental Model.
 - Current module: Module 1 - Unix/Linux Mental Model (active).
-- Current competency focus: Task 2 - process hierarchy and kernel/userspace boundaries.
+- Current competency focus: Task 3 - filesystem mental model and persistent versus virtual filesystems (partial evidence; interpretation in progress).
 - Current lab state: VirtualBox disposable VM `arch-lab-01` (Arch 7.2.4-arch1-2, CLI/headless) operational; snapshot `phase-0-base` verified; Docker functional; rsync backup verified.
 
 ## Demonstrated Evidence
@@ -26,6 +26,8 @@ Last updated: 2026-09-27
 - Task D6 fully completed: deconstructed `-rw-r--r--` and `drwxr-xr-x` permission mode strings into User/Group/Other triads, identified owner/group associations, and explained the traversal mechanics of the directory execute bit.
 - Task D7 fully completed: diagnosed a local web-server failure by separating process, port, and browser hypotheses; verified listeners with `ss`, located live processes with `pgrep`/`ps`, and recorded the `dmesg` privilege boundary.
 - Module 1 Task 1 completed with guidance: identified PID 1 as the systemd userspace init process, distinguished it from the kernel and operating system, interpreted the shell's PID/PPID, and described `/proc`, `/sys`, `/dev`, and `/run` as distinct kernel/runtime interfaces.
+- Module 1 Task 2 completed with guidance: traced `systemd(1) → systemd(1390) → konsole(19069) → bash(19077) → pstree(19593)`, explained parent/child process relationships, and distinguished PID identity from memory usage or software installation. Technical understanding is stronger than current written articulation fluency.
+- Module 1 Task 3 partial evidence collected: inspected `/home`, `/proc`, `/sys`, `/dev`, and `/run` with `findmnt`; observed `proc`, `sysfs`, `devtmpfs`, and `tmpfs` types; verified `/proc/$$` maps to the current shell and `/dev/null` is a character device. Interpretation remains incomplete.
 
 ## Not Yet Demonstrated
 
@@ -46,4 +48,4 @@ Last updated: 2026-09-27
 
 ## Next Recommended Action
 
-Complete Module 1 Task 2: draw and verify the actual process hierarchy from PID 1 to the current shell.
+Continue Module 1 Task 3 by determining the `/home` filesystem type from the `findmnt` column headings and local documentation.

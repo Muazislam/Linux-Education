@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-09-27
+Last updated: 2026-10-02
 
 ## Current Phase
 
@@ -8,7 +8,7 @@ Phase 1 - Unix/Linux mental model.
 
 ## Current Module
 
-Module 1 - Unix/Linux Mental Model (Task 1 complete; Task 2 next).
+Module 1 - Unix/Linux Mental Model (Tasks 1–2 complete; Task 3 next).
 
 ## Completed
 
@@ -32,6 +32,7 @@ Module 1 - Unix/Linux Mental Model (Task 1 complete; Task 2 next).
 - Phase 0 Baseline Diagnostic Task D7 (Troubleshooting Reasoning) completed: diagnosed unreachable local server via layered mental model, validated port listening via `ss -tulpin`, located live server processes, and observed kernel dmesg security boundaries.
 - Phase 0 retrospective and sign-off completed on 2026-09-25; Phase 1 is now ready to begin.
 - Module 1 Task 1 completed on 2026-09-27: explained PID 1/systemd, shell PID and PPID, and the different roles of `/proc`, `/sys`, `/dev`, and `/run` after instructor correction.
+- Module 1 Task 2 completed on 2026-10-02: verified the process hierarchy from PID 1 to the shell and `pstree`, and separated PID identity from RAM usage and software installation. Completed with guided correction; articulation remains a practice objective.
 
 ## Not Completed
 
@@ -52,7 +53,8 @@ Module 1 - Unix/Linux Mental Model (Task 1 complete; Task 2 next).
 - Submitted execution trace for `ls -ld ~/Downloads` demonstrating directory permissions (`drwxr-xr-x`).
 - Submitted execution trace for `ss -tulpn | grep 3000`, `ss -tulpin`, `pgrep -l live-server`, and `ps aux | grep -i server`.
 - Submitted Module 1 Task 1 reasoning and process evidence: `ps -p 1 -o pid,ppid,comm,args` and `ps -p "$$" -o pid,ppid,comm,args` (shell PID/PPID evidence).
+- Submitted Module 1 Task 2 process tree: `systemd(1) → systemd(1390) → konsole(19069) → bash(19077) → pstree(19593)`.
 
 ## Next Step
 
-Complete Module 1 Task 2: verify the process hierarchy between PID 1, the terminal/session process, and the current shell.
+Begin Module 1 Task 3: compare ordinary persistent directories with virtual and runtime filesystems.
