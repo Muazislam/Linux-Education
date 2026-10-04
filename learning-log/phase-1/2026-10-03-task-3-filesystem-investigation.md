@@ -79,7 +79,7 @@ Progress confirmed:
 
 Remaining corrections:
 
-- The `/dev` filesystem type is `devtmpfs`, not `devtmp`. The terminal output was visually wrapped; inspect the `SOURCE` and `FSTYPE` column alignment carefully.
+- Correction to the earlier review: on this system, both the `/dev` `SOURCE` and `FSTYPE` values are `devtmpfs`. The wrapped terminal output made the columns ambiguous. The unambiguous check is `findmnt -T /dev -no FSTYPE`.
 - `/sys` is related to `/proc` but does not contain all the same information. It exposes a structured view of kernel devices, drivers, and kernel objects.
 - The answer to why programs need `/dev/null` was not yet connected to its purpose. Discussion of `/dev/zero` and signal-interruptible reads is a different topic. The learner should explain how `/dev/null` is useful for safely discarding unwanted output or providing immediate end-of-file input.
 - The final persistence table should use `devtmpfs` for `/dev` and describe `/proc`, `/sys`, `/dev`, and `/run` as dynamically recreated or repopulated rather than simply saying they are all "in RAM."
