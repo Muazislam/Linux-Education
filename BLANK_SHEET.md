@@ -1,151 +1,113 @@
-## Task 3: Compare persistent, virtual, and runtime filesystems
+# 2. Other filesystem types
 
-**Target:** HOST  
-**Risk:** Read-only. Do not use `sudo`, write to `/sys`, or modify any files.
+Mostly correct:
+/home → btrfs
+/proc → proc
+/sys → sysfs
+/dev → devtmp
+/run → tmpfs
 
-### Objective
+I maade a mistake to write /dev file system type to be devtmpfs instead of devtmp. THis mistake happened because in my konsole, the devtmp and fs were joined together.
 
-Understand why `/home` behaves differently from `/proc`, `/sys`, `/dev`, and `/run`.
+```
+❯ findmnt -T /dev -o TARGET,SOURCE,FSTYPE,OPTIONS
+TARGET SOURCE FSTYPE OPTIONS
+/dev   devtmpfs
+              devtmp rw,nosuid,size=7985760k,nr_inodes=1996440,mode=755,inode64,hug
 
-Run:
-
-```bash
-findmnt -T /home -o TARGET,SOURCE,FSTYPE,OPTIONS
-findmnt -T /proc -o TARGET,SOURCE,FSTYPE,OPTIONS
-findmnt -T /sys -o TARGET,SOURCE,FSTYPE,OPTIONS
-findmnt -T /dev -o TARGET,SOURCE,FSTYPE,OPTIONS
-findmnt -T /run -o TARGET,SOURCE,FSTYPE,OPTIONS
 ```
 
-Then inspect examples:
+# 3. Persistent user data
 
-```bash
-ls -ld /home /proc /sys /dev /run
+Your investigation became stuck because man -k searches manual descriptions; it does not search directory meanings very effectively.
+
+Try:
+man 7 file-hierarchy
+Inside the manual:
+/home
+/run
+
+If that manual does not exist:
+man hier
+Use this reasoning:
+/home is backed by /dev/sda2[/@home].
+/run is backed by tmpfs.
+One source refers to storage on a device.
+The other refers to a temporary filesystem.
+Ask yourself: which one would normally survive a reboot?
+
+```
+    I tried man 7 file-hierarchy and i choosed a link of html to the website on file system. There was information about /home and /run but it just contained purpose and requirement information. the /home had one more explanation paragragh although that i do not remember.
+    And then i tried man hier. And it showed me all about /tmp and /dev and further various / files and one line information about them. But I didn't find anything about fs regarding tmpfs.
+    but I would say that I was also reading about slash sys uh, I was also reading about slash sys in the, the in the man hire h-i-e-r so I saw that the slash sys explanation was that this is a mount point for the sysfs file system which provides information about the kernel like slash proc but better structured following the form formalizing of K object infrastructure although I do not understand much about it and I don't think that this is important information for me right now but what I understood this is a hypothesis that I could conclude that uh, the sysfs means sys uh, the the uh, sysfs was the mount point of slash sys and yet Uh, it has FS with it. Maybe it means file system. Because if I remember about slash sys, it contains all the proc uh, information about the kernel, like slash proc. The first hypothesis that I conclude is that um, maybe a mount point also contains FS because it may contain files that are being taken from another root directory. like slash sys is taking files information like slash proc or maybe and there is also hypothesis that slash sys also displays the system information um, when we are prompted just like the taskbar manager of Windows so maybe the FS means that those files can be displayed like that Although this is just a mount point and mount point doesn't deal with displaying mount point deals with um, connecting the storage or directories with the kernel of Linux. So I would say that maybe ..
+    in case if we are talking about rebooting then um, the, uh, the slash home directory is mounted with the um, slash dev slash sta2 and uh, the slash root is mounted at tempfs so I do not think that the tempfs sorry uh, so uh, I would uh, I think it is clearly understandable that the slash home directory is going to persist even after the reboot but slash root directory is not going to persist because it contains temporary files and they vanish away when the device reboots
+
+```
+
+4. Kernel or boot-generated directories
+   Your conclusion is broadly correct, but the explanation needs correction.
+   Do not group them together simply because they are “in RAM.” Their producers differ:
+   /proc: kernel process and system information.
+   /sys: kernel device and object information.
+   /dev: device interfaces created and managed through the device system.
+   /run: temporary runtime state created during boot and service startup.
+   Also, /home does not live in ROM. It is stored on writable persistent storage, such as an SSD or hard drive.
+
+```
+
+okay i understand that my wording had been a little off compared to what is needed for a proffessional linux dev. And i willtry to make this correction from now on
+
+```
+
+# 5th mistake correction.
+
+The ($$) expands to process ID of shell. In a subshell, it expands to the process ID of the parent shell, not the subshell.
+
+The $$ gives the current shell pid. And when we combine it with /proc, it gives the directory in the /proc where the current shell pid exists.
+
+```
 ls -ld /proc/$$
-ls -l /dev/null
-```
-
-Use local documentation:
-
-```bash
-man findmnt
-man 5 proc
-man 5 sysfs
-man 4 null
-```
-
-Search inside the manuals for:
-
-```text
-/filesystem
-/mounted
-/virtual
-/device
-```
-
-### Think through these questions
-
-1. What filesystem type is `/home` using?   
-    ```
-    /home is using btrfs filesystem type. I concluded that from the third column FSTYPE. Although I don't know the specifics of btrfs.
-    I also have a question that what is filesystem type?
-
-    ```
-2. What filesystem types are `/proc`, `/sys`, `/dev`, and `/run` using?
-    ```
-    /home filesystem type is btrfs
-    /proc filesystem type is proc
-    /sys filesystem type is sysfs
-    /dev filesystem type is devtmp
-    /run filesystem type is tmpfs
-
-
-    ```
-3. Which directory primarily stores persistent user data?
-    ```
-    The process of me searching for answer:
-        ```
-        🚀  muazislambabar ~   10:32  ❯ man -k /run
-        dracut-shutdown.service (8) - unpack the initramfs to /run/initramfs
-
-        bUT this is not the right answer either. I think i should tell the man page to give me documentation about /run or just run in the filesystem. And the way to access filesystem is findmnt I guess.
-
-        I did this but tstill no use
-          in 45s491ms ❯ man -k findmnt,run
-            findmnt,run: nothing appropriate.
-
-            🚀  muazislambabar ~   10:35  ❯ man -k findmnt
-            findmnt (8)          - find a filesystem
-
-            🚀  muazislambabar ~   10:36  ❯ man findmnt
-
-            🚀  muazislambabar ~   10:36   in 19s176ms ❯ 
-
-            Damn I am thinking of what to do here. But the answer is not comming to me. Might be beause i do not know which command to through on the man. Or how to search this. I can easily get answer from the internet though.
-
-            But from my knowledge. THe /proc is for process. It contains all the files for the things that are running and it gives them all a PID.
-            And /run i don't remember much about it. Maybe it contains the persistent data. But i thought that persistent data would be stored in a catch folder.
-            /dev is for devices. it contains all the files for the hardware of the system
-            /sys is for containing files of the things that are happening over the kernel. It also gives moniter informatrion.#
-            
-            I can say this because of previous task and that i remember many things from the videos on file system in linux.
-
-        ```
-    ```
-4. Which directories are generated or populated by the kernel or boot process?
-    ```
-    I would say /run /sys /dev /proc are generated or populated by the kernel or boot process. Because they are contained in the RAM. It is only /home that lives in ROM.
-    ```
-5. Why does `/proc/$$` correspond to your current shell?
-    ```
-    /proc/$$ corresponds to current shell. I don't know how. But $$ looks familiar. And I would say that $$ maybe gives to root or shell level something.I read this in phase 0. So, i hardly remember it.
-
-    I will try typing man $$. And see what happens.
-
-     in 19s176ms ❯ man $$
-    No manual entry for 68555
-
-    🚀  muazislambabar ~   10:50  ❯ man -k $$
-    68555: nothing appropriate.
-
-    🚀  muazislambabar ~   10:51  ❯ 
-
-
-    You asked me why slash proc slash dollar corresponds to my current shell. Um, as I remember, when uh, we write dollar dollar, maybe it means something that is relevant to the home directory or the shell. Although I used it in the past in the phase zero, so I do not remember much about it. But from the output that I can see, it is a directory and it is not a root directory, but it is, uh, I think, near from the home directory. And uh, you say dollar dollar, it shows 61701. So um, maybe dollar dollar uh, here brings the PID number, maybe, and uh, maybe it shows that. When the command was run, it had a specific PID number, and at the end of the directory, um, it is also showing slash proc slash the PID number 61701. Uh, maybe this uh, is showing that the current process that I typed, the command that I typed ls negative ld slash proc slash dollar dollar executed, and it had. Uh, PID in the process um, slash proc directory because the slash proc directory contains all the processes that are uh, happening on the kernel. So maybe it uh, the pro this process happened in an instant and it recorded it.
-    ```
-6. Why is `/dev/null` a device interface rather than an ordinary text file?
-    ```
-    Now I do not know why slash dev slash null is uh, something like uh, I do not know why slash dev slash null is uh, a device interface rather than an ordinary text but from the command that I typed I can see that uh, The output does not start with D, it starts with C. And uh, if it, the output starts with D, it is usually a directory, but uh, it is starting with C. So it is not a directory, I will say. And you say slash dev slash null. Normally, when we say slash dev, we write slash SDA1, SDA2, but here we uh, typed null. So um, I think that. This is the directory that does not exist. It is a null directory. Therefore, we have C in the starting. And uh, normally, uh, not normally, but uh, I would get uh, but I see that it exists in the root. And uh, it also gives time and month and afterwards it just types slash dev slash null yeah. 
-    ```
-7. Which contents would you expect to disappear or change after reboot?
-
-I would say that the content that would disappear when we reboot um, would be everything that exists in the RAM. So most of the root directories such as slash dev slash sys slash um, swap slash sys are persistent uh, memory directories which um, are formed in the RAM when the kernel starts or when the Linux uh, kernel starts and the all the files that are generated are saved in the RAM they are not saved in the ROM it is the slash home directory that contains all the things that are saved in the ROM 
-
-
-Use this report:
-
-```text
-OBJECTIVE:
-COMMANDS USED:
-
-FILESYSTEM COMPARISON:
-- /home:
-- /proc:
-- /sys:
-- /dev:
-- /run:
-
-IMPORTANT OUTPUT:
-
-INTERPRETATION:
-
-WHAT I EXPECTED:
-
-WHAT SURPRISED ME:
-
-UNRESOLVED QUESTIONS:
-
+dr-xr-xr-x 9 muazislambabar muazislambabar 0 اکتوبر  4 15:08 /proc/115580
 
 ```
 
-Do not search for definitions first. Start with the command output, then use the manuals to explain what you observed.
+6. /dev/null
+   Your observation about the leading c is correct.
+   From:
+   crw-rw-rw-
+   the first character means:
+   d: directory;
+   -: regular file;
+   c: character device.
+   /dev/null exists. It is not a nonexistent directory.
+   Read its documentation:
+   man 4 null
+
+   Then answer:
+   What happens when data is written to /dev/null?
+   ```
+    The data written to /dev/null and /dev/zero special files is discarded.
+   ```
+   What happens when a program reads from /dev/null?
+    ```
+    Reads from /dev/null always return end of file. (i.e., read(2) return (0))
+    ```
+   Why would programs need such an interface?
+    ```
+    If these devices are not written and readable for all users, many programs will act strangely.
+    Since linux reads from /dev/zero are interruptible by signals. This change helps with bad latencies for large reads from /dev/zero.
+
+    ```
+
+    7. Reboot behavior
+Your general direction is reasonable, but avoid using “ROM.” Use:
+persistent storage;
+temporary runtime storage;
+virtual kernel filesystem.
+Build this table from your findmnt evidence:
+PATH    FSTYPE     SOURCE             PERSISTENT AFTER REBOOT?
+/home   btrfs      /dev/sda2[/@home]   Yes
+/proc   proc        proc                No
+/sys    sysfs       sysfs               No
+/dev    devtmp      devtmpfs            No
+/run    tmpfs       tmpfs               No
