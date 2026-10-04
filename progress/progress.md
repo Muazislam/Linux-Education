@@ -55,6 +55,7 @@ Module 1 - Unix/Linux Mental Model (Tasks 1–3 complete; Task 4 next).
 - Submitted execution trace for `ss -tulpn | grep 3000`, `ss -tulpin`, `pgrep -l live-server`, and `ps aux | grep -i server`.
 - Submitted Module 1 Task 1 reasoning and process evidence: `ps -p 1 -o pid,ppid,comm,args` and `ps -p "$$" -o pid,ppid,comm,args` (shell PID/PPID evidence).
 - Submitted Module 1 Task 2 process tree: `systemd(1) → systemd(1390) → konsole(19069) → bash(19077) → pstree(19593)`.
+- Submitted Module 1 Task 3 mount evidence for `/home`, `/proc`, `/sys`, `/dev`, and `/run`; verified `/proc/$$`; identified `/dev/null` as a character device; and tested its read/write behavior (`printf`, `echo`, `wc -c`, `cat`). Full interpretation and corrections are in `learning-log/phase-1/2026-10-03-task-3-filesystem-investigation.md`.
 
 ## Next Step
 

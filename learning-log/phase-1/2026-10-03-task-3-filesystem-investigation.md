@@ -1,112 +1,60 @@
-# Learning Session: Phase 1 - Unix/Linux Mental Model (Task 3, Partial)
+# Learning Session: Phase 1 - Unix/Linux Mental Model (Task 3)
 
 ## Date
 
-2026-10-03
+2026-10-03 to 2026-10-04
 
 ## Objective
 
-Begin comparing the persistent home filesystem with virtual and runtime filesystems.
+Compare persistent storage with virtual and runtime filesystems; interpret `/proc/$$`; and explain `/dev/null` behavior.
 
 ## Status
 
-Partial evidence collected. Conceptual interpretation is intentionally incomplete; Task 3 is not yet signed off.
+**COMPLETE — 2026-10-04, guided practice (L3).**
 
-## Commands and Evidence
+The learner used command output and local manuals, corrected initial misconceptions, and explained the observed behavior with instructor guidance. This is not an independent mastery claim. Clear technical articulation remains a practice objective.
 
-The learner inspected mount information for `/home`, `/proc`, `/sys`, `/dev`, and `/run` using `findmnt`, then inspected directory metadata and representative entries.
+## Evidence Collected
 
-Important observations:
+Mount information was gathered with `findmnt -T <path> -o TARGET,SOURCE,FSTYPE,OPTIONS` for `/home`, `/proc`, `/sys`, `/dev`, and `/run`.
 
-- `/home` reported source `/dev/sda2[/@home]` and a filesystem type shown in the `FSTYPE` column.
-- `/proc` reported source and filesystem type `proc`.
-- `/sys` reported source and filesystem type `sysfs`.
-- `/dev` reported a `devtmpfs` filesystem.
-- `/run` reported a `tmpfs` filesystem.
-- `/proc` and `/sys` displayed directory sizes of `0`, while `/home` displayed ordinary directory metadata.
-- `/proc/$$` resolved to the learner's current shell process directory, `/proc/61701`.
-- `/dev/null` was displayed as a character device with major/minor numbers `1,3`.
+| Path | Source | Filesystem type | Interpretation |
+|---|---|---|---|
+| `/home` | `/dev/sda2[/@home]` | `btrfs` | Device-backed persistent user storage on this system. |
+| `/proc` | `proc` | `proc` | Virtual interface exposing process and kernel state. |
+| `/sys` | `sysfs` | `sysfs` | Structured view of kernel devices, drivers, and kernel objects. |
+| `/dev` | `devtmpfs` | `devtmpfs` | Filesystem providing device nodes and interfaces. |
+| `/run` | `tmpfs` | `tmpfs` | Temporary runtime state populated during boot and service operation. |
 
-## Command Error and Recovery
+The learner verified the `/dev` values separately:
 
-The first `/sys` command used the misspelled output column `SHOURCE`. `findmnt` reported an unknown column. The learner corrected it to `SOURCE` and obtained valid output.
-
-## Instructor Note
-
-The learner requested indirect, documentation-first guidance rather than direct answers. Follow-up should proceed one question at a time using observed column names, local manual definitions, and verification against the command output.
-
-## Next Question
-
-Determine the filesystem type used by `/home` from the `findmnt` output, then explain how the column location supports the conclusion.
-
-## Follow-up Submission - 2026-10-04
-
-The learner submitted written reasoning for all seven Task 3 questions. The submission is preserved in the session history and remains in progress pending correction of filesystem persistence, shell expansion, device-node, and reboot-behavior concepts.
-
-Confirmed or substantially correct observations:
-
-- `/home` uses `btrfs`, identified from the `FSTYPE` column.
-- `/proc` uses `proc` and `/sys` uses `sysfs`.
-- `/proc` represents process/kernel state, `/sys` represents kernel device/object state, and `/dev` provides device interfaces.
-- `/proc/$$` resolves to a numeric process directory associated with the current shell; the learner correctly suspected that `$$` expands to the shell PID.
-- `/dev/null` begins with `c` in its mode string, indicating a character device rather than a directory.
-
-Corrections required:
-
-- `/dev` was reported as `devtmpfs` by `findmnt`; `devtmp` was a truncated visual value, not the filesystem type.
-- `/home` is persistent storage, but it is not ROM. Persistent data is normally stored on writable disk/SSD-backed storage.
-- `/run` is runtime state, not persistent user data.
-- RAM-backed or virtual filesystems are not all explained by one rule; `/proc`, `/sys`, `/dev`, and `/run` have different producers and purposes.
-- `man $$` expanded `$$` before `man` ran, so `man` received a number. The relevant documentation is in the Bash manual under shell special parameters.
-- `/dev/null` is an existing character-device interface with defined read/write behavior; it is not a nonexistent or null directory.
-
-## Instructor Review Status
-
-Task 3 remains incomplete. Continue with one concept at a time, beginning with the meaning of a filesystem type and the persistence clue provided by the `SOURCE` and `FSTYPE` columns.
-
-## Second Submission Review - 2026-10-04
-
-The learner revisited the manual pages and submitted a revised interpretation.
-
-Progress confirmed:
-
-- Correctly identified `btrfs` as the `/home` filesystem type from the `FSTYPE` column.
-- Correctly identified `proc`, `sysfs`, and `tmpfs` for `/proc`, `/sys`, and `/run`.
-- Correctly reasoned that `/home` is device-backed persistent storage while `/run` is temporary runtime storage.
-- Corrected the earlier ROM/RAM model and understood that `/home` is stored on writable persistent storage.
-- Correctly explained that `$$` expands to the current shell PID and that `/proc/$$` resolves to that process's `/proc` directory.
-- Correctly identified `/dev/null` as an existing character device and correctly documented that writes are discarded and reads return EOF.
-
-Remaining corrections:
-
-- Correction to the earlier review: on this system, both the `/dev` `SOURCE` and `FSTYPE` values are `devtmpfs`. The wrapped terminal output made the columns ambiguous. The unambiguous check is `findmnt -T /dev -no FSTYPE`.
-- `/sys` is related to `/proc` but does not contain all the same information. It exposes a structured view of kernel devices, drivers, and kernel objects.
-- The answer to why programs need `/dev/null` was not yet connected to its purpose. Discussion of `/dev/zero` and signal-interruptible reads is a different topic. The learner should explain how `/dev/null` is useful for safely discarding unwanted output or providing immediate end-of-file input.
-- The final persistence table should use `devtmpfs` for `/dev` and describe `/proc`, `/sys`, `/dev`, and `/run` as dynamically recreated or repopulated rather than simply saying they are all "in RAM."
-
-## Current Assessment
-
-Task 3 is still incomplete but close to completion. The learner demonstrates improving documentation use and a stronger filesystem persistence model. One focused follow-up on `/dev/null` and the corrected `/dev` type remains.
-
-## `/dev/null` Practical Follow-up - 2026-10-04
-
-The learner ran and interpreted these examples:
-
-```bash
-printf "This will be discarded" > /dev/null
-wc -c < /dev/null
-cat < /dev/null
-echo "text" > /dev/null
+```text
+findmnt -T /dev -no SOURCE  → devtmpfs
+findmnt -T /dev -no FSTYPE  → devtmpfs
 ```
 
-Observed correctly that output redirected to `/dev/null` is not displayed, `wc -c` reports zero, and `cat` produces no visible output. The learner correctly recognized `<` as input redirection and hypothesized that `/dev/null` supplies no data. Remaining conceptual refinement: reads from `/dev/null` return EOF immediately; EOF is the input stream signal that no more bytes are available, so `cat` exits normally. `wc` reports a count of zero bytes because it receives EOF before reading any bytes. `/dev/null` is an existing character-device interface, not an ordinary empty file.
+Other submitted observations:
 
-The learner's final response correctly identified both `/dev` SOURCE and FSTYPE as `devtmpfs`. They explained that `/dev/null` discards writes and returns no input on reads. Instructor refinement: EOF is the read result indicating no more bytes are available, not a special character stored at the end of every file; `/dev/null` produces EOF immediately. The same read condition occurs when a regular file has been fully read. Terminal Ctrl-D can signal end of input in canonical terminal mode when no buffered characters remain.
+- `ls -ld /proc/$$` resolved to `/proc/115580` in a later session, matching the expanded shell PID.
+- `ls -l /dev/null` showed mode string beginning with `c` and major/minor numbers `1,3`, identifying an existing character device.
+- `printf "This will be discarded" > /dev/null` and `echo "text" > /dev/null` produced no terminal text because standard output was redirected to `/dev/null`.
+- `wc -c < /dev/null` reported `0`, showing that zero bytes were read before EOF.
+- `cat < /dev/null` printed nothing and exited because a read from `/dev/null` immediately returns EOF.
 
-## Final Assessment
+## Learning and Corrections
 
-Task 3 completed on 2026-10-04 at guided-practice level (L3). The learner used command output and manual pages to refine the filesystem and device-interface model. Some definitions required instructor correction, so this is not an independent mastery claim.
+- A filesystem type identifies the filesystem implementation/format associated with a mount; it is distinct from the source, though source and type happen to both be `devtmpfs` for `/dev` here.
+- `/home` is writable persistent storage, not ROM. `/run` is temporary runtime storage. `/proc`, `/sys`, and `/dev` are dynamically provided interfaces with different purposes; they should not all be described simply as “RAM directories.”
+- `$$` is a Bash special parameter that expands to the current shell PID; `/proc/$$` therefore names the corresponding process entry.
+- `/dev/null` is a character-device interface. Writes are discarded; reads return EOF immediately.
+- EOF is the result/condition reported by a read when no more bytes are available, not generally a special character stored at the end of a file. `/dev/null` produces EOF immediately; an ordinary file produces EOF after its bytes have been read. In canonical terminal input, Ctrl-D can make end-of-input available when no buffered characters remain.
+- `sysfs` is the filesystem mounted at `/sys`; its `fs` suffix identifies a filesystem. `/sys` exposes structured kernel object/device information and is related to, but not interchangeable with, `/proc`.
+- One attempted `findmnt` invocation used the misspelled column `SHOURCE`; the learner read the error and corrected it to `SOURCE`.
+
+## Assessment
+
+The learner correctly interpreted all five filesystem types, identified `/home` as persistent and `/run` as temporary, explained the distinct purpose of `/proc` and `/sys`, mapped `$$` to the current shell's `/proc` entry, and experimentally demonstrated `/dev/null` input and output behavior. Some explanations required prompting and technical wording refinement, so the task is signed off at **L3: can explain/perform with guidance**.
 
 ## Next Action
 
-Begin Module 1 Task 4: relate standard streams and redirection to process interfaces.
+Proceed to Module 1 Task 4: standard input, output, error, and redirection as process interfaces.

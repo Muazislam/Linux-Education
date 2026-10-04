@@ -28,7 +28,6 @@ Last updated: 2026-10-04
 - Module 1 Task 1 completed with guidance: identified PID 1 as the systemd userspace init process, distinguished it from the kernel and operating system, interpreted the shell's PID/PPID, and described `/proc`, `/sys`, `/dev`, and `/run` as distinct kernel/runtime interfaces.
 - Module 1 Task 2 completed with guidance: traced `systemd(1) → systemd(1390) → konsole(19069) → bash(19077) → pstree(19593)`, explained parent/child process relationships, and distinguished PID identity from memory usage or software installation. Technical understanding is stronger than current written articulation fluency.
 - Module 1 Task 3 completed with guidance: compared `btrfs`, `proc`, `sysfs`, `devtmpfs`, and `tmpfs`; distinguished persistent `/home` from runtime/virtual filesystems; verified `$$` maps to `/proc/<shell-PID>`; identified `/dev/null` as a character device that discards writes and returns EOF on reads. EOF explanation was refined as a read result indicating no more bytes, not a special marker stored in the file.
-- Module 1 Task 3 partial evidence collected: inspected `/home`, `/proc`, `/sys`, `/dev`, and `/run` with `findmnt`; observed `proc`, `sysfs`, `devtmpfs`, and `tmpfs` types; verified `/proc/$$` maps to the current shell and `/dev/null` is a character device. Interpretation remains incomplete.
 
 ## Not Yet Demonstrated
 

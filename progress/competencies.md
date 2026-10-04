@@ -4,7 +4,7 @@ Mastery levels follow `INSTRUCTOR_PROTOCOL.md`.
 
 Detailed mastery confidence, retention, and reassessment tracking lives in `progress/mastery.md`.
 
-Current evidence status: Initial Phase 0 baseline evidence demonstrated on host, VirtualBox VM, and backup systems.
+Current evidence status: Phase 0 baseline plus Phase 1 Tasks 1–3 demonstrated with guidance; see `progress/mastery.md` and Phase 1 learning logs for current levels and evidence.
 
 | Competency | Level | Last Evidence | Instructor Note |
 |---|---:|---|---|

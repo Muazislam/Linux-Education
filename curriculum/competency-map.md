@@ -4,7 +4,7 @@ Use the mastery scale in `INSTRUCTOR_PROTOCOL.md`.
 
 | Domain | Target | Current | Evidence | Notes |
 |---|---:|---:|---|---|
-| Unix/Linux mental model | L5 | L0 | None | Not assessed. |
+| Unix/Linux mental model | L5 | L3 | Phase 1 Tasks 1–3: process hierarchy, filesystem types/persistence, `/proc/$$`, `/dev/null` | Demonstrated with guidance; continue articulation and independent retrieval practice. |
 | Shell navigation and streams | L5 | L0 | None | Not assessed. |
 | Shell scripting and automation | L5 | L0 | None | Not assessed. |
 | Command-line text processing | L5 | L0 | None | Not assessed. |
