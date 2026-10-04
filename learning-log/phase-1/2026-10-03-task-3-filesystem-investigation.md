@@ -101,4 +101,12 @@ echo "text" > /dev/null
 
 Observed correctly that output redirected to `/dev/null` is not displayed, `wc -c` reports zero, and `cat` produces no visible output. The learner correctly recognized `<` as input redirection and hypothesized that `/dev/null` supplies no data. Remaining conceptual refinement: reads from `/dev/null` return EOF immediately; EOF is the input stream signal that no more bytes are available, so `cat` exits normally. `wc` reports a count of zero bytes because it receives EOF before reading any bytes. `/dev/null` is an existing character-device interface, not an ordinary empty file.
 
-Task 3 remains in progress pending learner explanation of EOF and correction of `/dev` FSTYPE in the final summary.
+The learner's final response correctly identified both `/dev` SOURCE and FSTYPE as `devtmpfs`. They explained that `/dev/null` discards writes and returns no input on reads. Instructor refinement: EOF is the read result indicating no more bytes are available, not a special character stored at the end of every file; `/dev/null` produces EOF immediately. The same read condition occurs when a regular file has been fully read. Terminal Ctrl-D can signal end of input in canonical terminal mode when no buffered characters remain.
+
+## Final Assessment
+
+Task 3 completed on 2026-10-04 at guided-practice level (L3). The learner used command output and manual pages to refine the filesystem and device-interface model. Some definitions required instructor correction, so this is not an independent mastery claim.
+
+## Next Action
+
+Begin Module 1 Task 4: relate standard streams and redirection to process interfaces.

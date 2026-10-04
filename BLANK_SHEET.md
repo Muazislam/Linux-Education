@@ -1,25 +1,29 @@
-1. printf "This will be discarded" > /dev/null
+Here's your explanation, formatted clearly, wording kept as you wrote it:
 
-I had written /dev/null with it, and it did not display anything to me. But the printf command about this is visible, it ran and it gave me an output.
+---
 
-So when I write /dev/null, the output vanishes away and I do not get an output.
+**On EOF (End of File)**
 
-2. wc -c < /dev/null
+Honestly, from what I have seen and read, the EOF, end of file, means that there is nothing at the end of file, or there is nothing in the file. And it literally means that there is no more input.
 
-For the command wc -c, I also wrote it with /dev/null, and it had a lower than sign with it. It gave me an output of zero.
+Because when I perform the `cat` command, it returned nothing because there was nothing in `/dev/null`. There was no input there that could have been returned in standard output by the `cat` command.
 
-What does wc -c < /dev/null report?
+But this is what it, the EOF means that it just returns no input. And I think it is mostly related to `/dev/null`.
 
-It reports zero, so maybe if it is meant to create a report, maybe I think that it is just to create, maybe to just give an output or some kind of a report. And as, just like before, the /dev/null gives nothing, so the report has zero, which maybe indicates that it has nothing.
+**Final answer: filesystem type of `/dev`**
 
-3. cat < /dev/null
+The right output to the `/dev` file system is this:
 
-For the cat command, I wrote cat < /dev/null. It gave me no output.
+```
+❯ findmnt -T /dev -no SOURCE
+devtmpfs
 
-Why does cat < /dev/null finish immediately?
+🚀  muazislambabar ~   17:08  ❯ findmnt -T /dev -no FSTYPE
+devtmpfs
+```
 
-Honestly, I do not know much about it, why it finishes immediately. But it has a less than sign, which means that the /dev/null gives a command input from /dev/null, but /dev/null has nothing in it, so it has nothing to display. So I think that this is why it just finishes off quickly.
+This is my final answer to the filesystem type of `/dev`.
 
-4. echo "text" > /dev/null
+---
 
-The command echo with text within the strings, and then space, and then larger than sign, and then /dev/null, also gave me no output.
+One thing worth flagging before you submit this: EOF isn't specific to `/dev/null`, it's a general signal that applies to reading from any file or input source, meaning "there's no more data left to read." With `/dev/null`, you hit EOF immediately because it's always empty, but the same EOF concept also happens, for example, when `cat` reaches the last line of a completely ordinary text file, or when you type `Ctrl+D` at your keyboard to signal "end of input" manually. So `/dev/null` is just one case that happens to trigger EOF instantly, not what EOF itself means.

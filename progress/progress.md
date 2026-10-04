@@ -1,6 +1,6 @@
 # Progress
 
-Last updated: 2026-10-02
+Last updated: 2026-10-04
 
 ## Current Phase
 
@@ -8,7 +8,7 @@ Phase 1 - Unix/Linux mental model.
 
 ## Current Module
 
-Module 1 - Unix/Linux Mental Model (Tasks 1–2 complete; Task 3 next).
+Module 1 - Unix/Linux Mental Model (Tasks 1–3 complete; Task 4 next).
 
 ## Completed
 
@@ -33,6 +33,7 @@ Module 1 - Unix/Linux Mental Model (Tasks 1–2 complete; Task 3 next).
 - Phase 0 retrospective and sign-off completed on 2026-09-25; Phase 1 is now ready to begin.
 - Module 1 Task 1 completed on 2026-09-27: explained PID 1/systemd, shell PID and PPID, and the different roles of `/proc`, `/sys`, `/dev`, and `/run` after instructor correction.
 - Module 1 Task 2 completed on 2026-10-02: verified the process hierarchy from PID 1 to the shell and `pstree`, and separated PID identity from RAM usage and software installation. Completed with guided correction; articulation remains a practice objective.
+- Module 1 Task 3 completed on 2026-10-04: interpreted filesystem types and persistence, distinguished `/proc`, `/sys`, `/dev`, and `/run`, verified `/proc/$$`, and tested `/dev/null` input/output behavior. Completed with guided investigation; EOF was clarified as a read result indicating no more bytes.
 
 ## Not Completed
 
@@ -57,4 +58,4 @@ Module 1 - Unix/Linux Mental Model (Tasks 1–2 complete; Task 3 next).
 
 ## Next Step
 
-Begin Module 1 Task 3: compare ordinary persistent directories with virtual and runtime filesystems.
+Begin Module 1 Task 4: trace standard input, output, error, and redirection as process interfaces.

@@ -1,12 +1,12 @@
 # Current State
 
-Last updated: 2026-10-03
+Last updated: 2026-10-04
 
 ## Current Position
 
 - Current phase: Phase 1 - Unix/Linux Mental Model.
 - Current module: Module 1 - Unix/Linux Mental Model (active).
-- Current competency focus: Task 3 - filesystem mental model and persistent versus virtual filesystems (partial evidence; interpretation in progress).
+- Current competency focus: Task 4 - streams and file interfaces in the Unix/Linux mental model.
 - Current lab state: VirtualBox disposable VM `arch-lab-01` (Arch 7.2.4-arch1-2, CLI/headless) operational; snapshot `phase-0-base` verified; Docker functional; rsync backup verified.
 
 ## Demonstrated Evidence
@@ -27,6 +27,7 @@ Last updated: 2026-10-03
 - Task D7 fully completed: diagnosed a local web-server failure by separating process, port, and browser hypotheses; verified listeners with `ss`, located live processes with `pgrep`/`ps`, and recorded the `dmesg` privilege boundary.
 - Module 1 Task 1 completed with guidance: identified PID 1 as the systemd userspace init process, distinguished it from the kernel and operating system, interpreted the shell's PID/PPID, and described `/proc`, `/sys`, `/dev`, and `/run` as distinct kernel/runtime interfaces.
 - Module 1 Task 2 completed with guidance: traced `systemd(1) → systemd(1390) → konsole(19069) → bash(19077) → pstree(19593)`, explained parent/child process relationships, and distinguished PID identity from memory usage or software installation. Technical understanding is stronger than current written articulation fluency.
+- Module 1 Task 3 completed with guidance: compared `btrfs`, `proc`, `sysfs`, `devtmpfs`, and `tmpfs`; distinguished persistent `/home` from runtime/virtual filesystems; verified `$$` maps to `/proc/<shell-PID>`; identified `/dev/null` as a character device that discards writes and returns EOF on reads. EOF explanation was refined as a read result indicating no more bytes, not a special marker stored in the file.
 - Module 1 Task 3 partial evidence collected: inspected `/home`, `/proc`, `/sys`, `/dev`, and `/run` with `findmnt`; observed `proc`, `sysfs`, `devtmpfs`, and `tmpfs` types; verified `/proc/$$` maps to the current shell and `/dev/null` is a character device. Interpretation remains incomplete.
 
 ## Not Yet Demonstrated
@@ -48,4 +49,4 @@ Last updated: 2026-10-03
 
 ## Next Recommended Action
 
-Continue Module 1 Task 3 by determining the `/home` filesystem type from the `findmnt` column headings and local documentation.
+Begin Module 1 Task 4: trace standard input, output, error, and redirection as process interfaces.

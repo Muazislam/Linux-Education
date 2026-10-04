@@ -1,6 +1,6 @@
 # Mastery Ledger
 
-Last updated: 2026-10-02
+Last updated: 2026-10-04
 
 Mastery follows the L0-L7 scale in `INSTRUCTOR_PROTOCOL.md`.
 
@@ -19,7 +19,7 @@ Do not raise mastery without evidence. For critical Linux competencies, procedur
 
 | Competency | Current Level | Mastery Confidence | Evidence | Last Assessed | Retention Due | Weakness | Notes |
 |---|---:|---|---|---|---|---|---|
-| Unix/Linux mental model | L3 | Moderate | Module 1 Tasks 1–2: PID 1, shell PID/PPID, process hierarchy, `/proc`, `/sys`, `/dev`, `/run` | 2026-10-02 | TBD | Written articulation and independent explanation need practice | Technical understanding demonstrated with guidance; generated wording is not counted as independent evidence. |
+| Unix/Linux mental model | L3 | Moderate | Module 1 Tasks 1–3: PID/process hierarchy, filesystem types and persistence, `/proc/$$`, `/dev/null` and EOF | 2026-10-04 | TBD | Written articulation and independent explanation need practice | Concepts demonstrated with guided investigation; generated wording is not counted as independent evidence. |
 | Shell navigation and streams | L0 | None | None | Never | TBD | Unknown | Baseline pending. |
 | Shell scripting and automation | L0 | None | None | Never | TBD | Unknown | Baseline pending. |
 | Command-line text processing | L0 | None | None | Never | TBD | Unknown | Baseline pending. |
