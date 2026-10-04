@@ -1,16 +1,25 @@
-Correction 1: /sys vs /proc are not the same kind of information
+1. printf "This will be discarded" > /dev/null
 
-/proc contains information about processes and general kernel state, things like running process IDs, CPU info, memory stats, system uptime.
-/sys contains structured information specifically about kernel device drivers and kernel objects, meaning hardware devices, their drivers, and how they're organized internally by the kernel.
+I had written /dev/null with it, and it did not display anything to me. But the printf command about this is visible, it ran and it gave me an output.
 
-So the distinction isn't "one is a backup of the other" or "they overlap," they cover genuinely different categories, processes and kernel state versus devices and driver structure.
+So when I write /dev/null, the output vanishes away and I do not get an output.
 
-Correction 2: What "fs" in sysfs actually means
+2. wc -c < /dev/null
 
-The "fs" in sysfs does not mean sysfs behaves like a task manager or displays live readable information for humans to monitor. It simply identifies that sysfs is the name of the virtual filesystem type mounted at /sys. In other words, "fs" here just labels the filesystem format itself, similar to how ext4 or btrfs are filesystem type names, it's not describing what kind of information is shown or implying any monitoring function.
+For the command wc -c, I also wrote it with /dev/null, and it had a lower than sign with it. It gave me an output of zero.
 
-Correction 3: /dev/null not discussed
+What does wc -c < /dev/null report?
 
-You had previously discussed /dev/zero, but had not covered the purpose of /dev/null, which your instructor flagged as missing.
+It reports zero, so maybe if it is meant to create a report, maybe I think that it is just to create, maybe to just give an output or some kind of a report. And as, just like before, the /dev/null gives nothing, so the report has zero, which maybe indicates that it has nothing.
 
-For your own understanding going forward: /dev/null is a special device file that discards anything written to it. If you redirect output into it, that output effectively vanishes, it's commonly used when you want to suppress output you don't care about, for example command > /dev/null throws away whatever that command would normally print. Reading from /dev/null always gives you an empty result immediately, nothing to read. This is different from /dev/zero, which, when read from, gives you an endless stream of zero bytes, rather than discarding things.
+3. cat < /dev/null
+
+For the cat command, I wrote cat < /dev/null. It gave me no output.
+
+Why does cat < /dev/null finish immediately?
+
+Honestly, I do not know much about it, why it finishes immediately. But it has a less than sign, which means that the /dev/null gives a command input from /dev/null, but /dev/null has nothing in it, so it has nothing to display. So I think that this is why it just finishes off quickly.
+
+4. echo "text" > /dev/null
+
+The command echo with text within the strings, and then space, and then larger than sign, and then /dev/null, also gave me no output.

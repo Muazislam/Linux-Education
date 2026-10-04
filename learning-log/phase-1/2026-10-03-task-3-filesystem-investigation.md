@@ -87,3 +87,18 @@ Remaining corrections:
 ## Current Assessment
 
 Task 3 is still incomplete but close to completion. The learner demonstrates improving documentation use and a stronger filesystem persistence model. One focused follow-up on `/dev/null` and the corrected `/dev` type remains.
+
+## `/dev/null` Practical Follow-up - 2026-10-04
+
+The learner ran and interpreted these examples:
+
+```bash
+printf "This will be discarded" > /dev/null
+wc -c < /dev/null
+cat < /dev/null
+echo "text" > /dev/null
+```
+
+Observed correctly that output redirected to `/dev/null` is not displayed, `wc -c` reports zero, and `cat` produces no visible output. The learner correctly recognized `<` as input redirection and hypothesized that `/dev/null` supplies no data. Remaining conceptual refinement: reads from `/dev/null` return EOF immediately; EOF is the input stream signal that no more bytes are available, so `cat` exits normally. `wc` reports a count of zero bytes because it receives EOF before reading any bytes. `/dev/null` is an existing character-device interface, not an ordinary empty file.
+
+Task 3 remains in progress pending learner explanation of EOF and correction of `/dev` FSTYPE in the final summary.
